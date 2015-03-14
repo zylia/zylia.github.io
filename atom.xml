@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-14T20:13:49+08:00</updated>
+  <updated>2015-03-14T20:17:13+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -15,18 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[我的第一篇博客]]></title>
-    <link href="http://zylia.github.io/blog/2015/03/14/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+    <link href="http://zylia.github.io/blog/2015/03/14/test/"/>
     <updated>2015-03-14T14:23:07+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/03/14/第一篇博客</id>
+    <id>http://zylia.github.io/blog/2015/03/14/test</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[我的新家]]></title>
-    <link href="http://zylia.github.io/blog/2015/03/14/%E6%96%B0%E5%AE%B6/"/>
+    <link href="http://zylia.github.io/blog/2015/03/14/new-home/"/>
     <updated>2015-03-14T14:03:41+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/03/14/新家</id>
+    <id>http://zylia.github.io/blog/2015/03/14/new-home</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
