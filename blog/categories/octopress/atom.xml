@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | My Octopress Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-15T22:22:53+08:00</updated>
+  <updated>2015-03-15T22:53:22+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -128,15 +128,6 @@
 <p>每次添加了新的博客文章后，需要执行下面命令才重新生成</p>
 
 <p><code>rake generate</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我的新家]]></title>
-    <link href="http://zylia.github.io/blog/2015/03/14/new-home/"/>
-    <updated>2015-03-14T14:03:41+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/03/14/new-home</id>
-    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   

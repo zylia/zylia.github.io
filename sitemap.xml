@@ -15,6 +15,9 @@
     <loc>http://zylia.github.io/</loc>
   </url>
   <url>
+    <loc>http://zylia.github.io/blog/categories/life/</loc>
+  </url>
+  <url>
     <loc>http://zylia.github.io/blog/categories/octopress/</loc>
   </url>
 </urlset>
