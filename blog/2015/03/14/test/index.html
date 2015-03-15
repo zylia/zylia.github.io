@@ -120,10 +120,10 @@
 
 <p>DevKit是一个自解压文件，建议解压到D:/DevKit，需要注意解压目录中没有中文和空格。解压DevKit后，在命令行输入以下命令来安装：</p>
 
-<p>d:  <br />
-cd DevKit  <br />
-ruby dk.rb init  <br />
-ruby dk.rb install</p>
+<p><code>d:</code>  <br />
+<code>cd DevKit</code>  <br />
+<code>ruby dk.rb init</code>  <br />
+<code>ruby dk.rb install</code></p>
 
 <p><strong>安装Python</strong></p>
 
@@ -135,43 +135,43 @@ ruby dk.rb install</p>
 
 <p>Pygments模块用来使博客的代码高亮，我们在命令提示符中输入以下命令安装Pygments:</p>
 
-<p>easy_install pygments</p>
+<p><code>easy_install pygments</code></p>
 
 <p><strong>安装octopress</strong></p>
 
 <p>在GitBash中输入如下命令将octopress下载到本地：</p>
 
-<p>cd d:/GitProject</p>
+<p><code>cd d:/GitProject</code></p>
 
-<p>git clone git://github.com/imathis/octopress.git octopress</p>
+<p><code>git clone git://github.com/imathis/octopress.git octopress</code></p>
 
 <p>在使用git clone命令时，github会自动在本地建立master分支，在后面我们将会建立source分支专门保存博客代码。</p>
 
 <p>然后需要安装octopress的依赖项，安装依赖项需要用到Ruby的gem。由于国外的ruby站点经常会被屏蔽，我们使用国内的淘宝镜像作为gem的更新源：</p>
 
-<p>gem sources -r <code>https://rubygems.org/</code></p>
+<p><code>gem sources -r https://rubygems.org/</code></p>
 
-<p>gem sources -a <code>http://ruby.taobao.org/</code></p>
+<p><code>gem sources -a http://ruby.taobao.org/</code></p>
 
-<p>gem sources -l</p>
+<p><code>gem sources -l</code></p>
 
 <p>我们会看到只有淘宝的链接。</p>
 
-<p>修改octopress目录下的Gemfile文件，将第一行的&#8221;<a href="https://rubygems.org/">https://rubygems.org/</a>&ldquo;修改为&#8221;<a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a>&rdquo;</p>
+<p>修改octopress目录下的Gemfile文件，将第一行的<code>https://rubygems.org/</code>修改为<code>http://ruby.taobao.org/</code></p>
 
 <p>在命令提示符中进入到octopress目录，输入下面命令安装依赖项</p>
 
-<p>gem install bundler</p>
+<p><code>gem install bundler</code></p>
 
-<p>bundle install</p>
+<p><code>bundle install</code></p>
 
 <p>输入下面命令安装octopress的默认主题</p>
 
-<p>rake install</p>
+<p><code>rake install</code></p>
 
 <p>到此所有安装工作已经结束，输入下面命令:</p>
 
-<p>rake preview</p>
+<p><code>rake preview</code></p>
 
 <p>然后在浏览器中输入地址<a href="http://localhost:4000">http://localhost:4000</a></p>
 
@@ -189,13 +189,13 @@ ruby dk.rb install</p>
 
 <p>在命令提示符中进入octopress的安装目录，输入如下命令新建文章：</p>
 
-<p>rake new_post[&lsquo;new article&rsquo;]</p>
+<p><code>rake new_post['new article']</code></p>
 
 <p>生成的文件存在source/_posts目录中。</p>
 
 <p>每次添加了新的博客文章后，需要执行下面命令才重新生成</p>
 
-<p>rake generate</p>
+<p><code>rake generate</code></p>
 </div>
 
 
