@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-15T21:34:53+08:00</updated>
+  <updated>2015-03-15T22:03:51+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -18,9 +18,7 @@
     <link href="http://zylia.github.io/blog/2015/03/14/test/"/>
     <updated>2015-03-14T14:23:07+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/14/test</id>
-    <content type="html"><![CDATA[<h1>Window 7配置octopress</h1>
-
-<p>受一位同仁经常用octopress写博客的启发，我也准备搭个博客。</p>
+    <content type="html"><![CDATA[<p>受一位同仁经常用octopress写博客的启发，我也准备搭个博客。</p>
 
 <p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>
 
@@ -35,6 +33,9 @@
 <p>5) easy_install: <a href="https://bootstrap.pypa.io/ez_setup.py">https://bootstrap.pypa.io/ez_setup.py</a></p>
 
 <p>经过测试，这些软件版本可以安装成功。</p>
+
+<!-- more -->
+
 
 <h2>安装</h2>
 
@@ -66,9 +67,67 @@
 
 <p>在Python中安装第三方库需要使用easy_install。我们用之前下载的ez_setup.py脚本来下载和安装easy_install。easy_install会安装在Python安装目录的Scripts目录中，需要将easy_install的安装目录(例如C:\Python27\Scripts)加入到环境变量中才能在命令行中使用easy_install命令。</p>
 
-<p>Pygments模块用来使博客的代码高亮，我们在命令行中用如下命令安装Pygments:</p>
+<p>Pygments模块用来使博客的代码高亮，我们在命令提示符中输入以下命令安装Pygments:</p>
 
 <p>easy_install pygments</p>
+
+<p><strong>安装octopress</strong></p>
+
+<p>在GitBash中输入如下命令将octopress下载到本地：</p>
+
+<p>cd d:/GitProject</p>
+
+<p>git clone git://github.com/imathis/octopress.git octopress</p>
+
+<p>在使用git clone命令时，github会自动在本地建立master分支，在后面我们将会建立source分支专门保存博客代码。</p>
+
+<p>然后需要安装octopress的依赖项，安装依赖项需要用到Ruby的gem。由于国外的ruby站点经常会被屏蔽，我们使用国内的淘宝镜像作为gem的更新源：</p>
+
+<p>gem sources -r <a href="https://rubygems.org/">https://rubygems.org/</a></p>
+
+<p>gem sources -a <a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a></p>
+
+<p>gem sources -l</p>
+
+<p>我们会看到只有淘宝的链接。</p>
+
+<p>修改octopress目录下的Gemfile文件，将第一行的&#8221;<a href="https://rubygems.org/">https://rubygems.org/</a>&ldquo;修改为&#8221;<a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a>&rdquo;</p>
+
+<p>在命令提示符中进入到octopress目录，输入下面命令安装依赖项</p>
+
+<p>gem install bundler</p>
+
+<p>bundle install</p>
+
+<p>输入下面命令安装octopress的默认主题</p>
+
+<p>rake install</p>
+
+<p>到此所有安装工作已经结束，输入下面命令:</p>
+
+<p>rake preview</p>
+
+<p>然后在浏览器中输入地址<a href="http://localhost:4000%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E6%95%88%E6%9E%9C%E3%80%82">http://localhost:4000%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E6%95%88%E6%9E%9C%E3%80%82</a></p>
+
+<p><strong>解决中文问题</strong></p>
+
+<p>需要在系统中加入如下环境变量：</p>
+
+<p>LANG=zh_CN.UTF-8</p>
+
+<p>LC_ALL=zh_CN.UTF-8</p>
+
+<p><strong>在octopress中添加文章</strong></p>
+
+<p>在命令提示符中进入octopress的安装目录，输入如下命令新建文章：</p>
+
+<p>rake new_post[&lsquo;new article&rsquo;]</p>
+
+<p>生成的文件存在source/_posts目录中。</p>
+
+<p>每次添加了新的博客文章后，需要执行下面命令才重新生成</p>
+
+<p>rake generate</p>
 ]]></content>
   </entry>
   
