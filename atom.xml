@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[ZYlia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-15T22:53:22+08:00</updated>
+  <updated>2015-03-15T23:02:29+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[zylia]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -137,9 +137,6 @@
     <updated>2015-03-14T14:03:41+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/14/new-home</id>
     <content type="html"><![CDATA[<p>这是我的新家，欢迎大家多踩踩。</p>
-
-<!-- more -->
-
 ]]></content>
   </entry>
   
