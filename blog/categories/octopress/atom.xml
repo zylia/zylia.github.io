@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | My Octopress Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-15T17:28:08+08:00</updated>
+  <updated>2015-03-15T21:34:53+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Window 7配置octopress]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/14/test/"/>
+    <updated>2015-03-14T14:23:07+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/14/test</id>
+    <content type="html"><![CDATA[<h1>Window 7配置octopress</h1>
+
+<p>受一位同仁经常用octopress写博客的启发，我也准备搭个博客。</p>
+
+<p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>
+
+<p>1）Git: <a href="http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe">http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe</a></p>
+
+<p>2) Ruby: <a href="http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe">http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe</a></p>
+
+<p>3) DevKit: <a href="http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></p>
+
+<p>4) Python: <a href="http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi">http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi</a></p>
+
+<p>5) easy_install: <a href="https://bootstrap.pypa.io/ez_setup.py">https://bootstrap.pypa.io/ez_setup.py</a></p>
+
+<p>经过测试，这些软件版本可以安装成功。</p>
+
+<h2>安装</h2>
+
+<p><strong>安装Git</strong></p>
+
+<p>一路next就可以。</p>
+
+<p><strong>安装Ruby</strong></p>
+
+<p>也是一路next，记得勾选&#8221;Add Ruby executables to your PATH&#8221;，将Ruby的执行变量加入到环境变量中。</p>
+
+<p><strong>安装DevKit</strong></p>
+
+<p>DevKit是一个自解压文件，建议解压到D:/DevKit，需要注意解压目录中没有中文和空格。解压DevKit后，在命令行输入以下命令来安装：</p>
+
+<p>d:</p>
+
+<p>cd DevKit</p>
+
+<p>ruby dk.rb init</p>
+
+<p>ruby dk.rb install</p>
+
+<p><strong>安装Python</strong></p>
+
+<p>也是一路next就可以。</p>
+
+<p><strong>安装easy_install</strong></p>
+
+<p>在Python中安装第三方库需要使用easy_install。我们用之前下载的ez_setup.py脚本来下载和安装easy_install。easy_install会安装在Python安装目录的Scripts目录中，需要将easy_install的安装目录(例如C:\Python27\Scripts)加入到环境变量中才能在命令行中使用easy_install命令。</p>
+
+<p>Pygments模块用来使博客的代码高亮，我们在命令行中用如下命令安装Pygments:</p>
+
+<p>easy_install pygments</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我的新家]]></title>
