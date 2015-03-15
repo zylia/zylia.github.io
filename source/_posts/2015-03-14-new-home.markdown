@@ -1,7 +1,9 @@
 ---
 layout: post
-title: "new home"
+title: "我的新家"
 date: 2015-03-14 14:03:41 +0800
+author: zylia
 comments: true
-categories: 
+categories: life
 ---
+这是我的新家，欢迎大家多踩踩。
