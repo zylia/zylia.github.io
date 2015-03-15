@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | My Octopress Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-15T22:03:51+08:00</updated>
+  <updated>2015-03-15T22:17:16+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -22,7 +22,8 @@
 
 <p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>
 
-<p>1）Git: <a href="http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe">http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe</a></p>
+<p><font size=2>
+1) Git: <a href="http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe">http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe</a></p>
 
 <p>2) Ruby: <a href="http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe">http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe</a></p>
 
@@ -30,7 +31,7 @@
 
 <p>4) Python: <a href="http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi">http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi</a></p>
 
-<p>5) easy_install: <a href="https://bootstrap.pypa.io/ez_setup.py">https://bootstrap.pypa.io/ez_setup.py</a></p>
+<p>5) easy_install: <a href="https://bootstrap.pypa.io/ez_setup.py">https://bootstrap.pypa.io/ez_setup.py</a></font></p>
 
 <p>经过测试，这些软件版本可以安装成功。</p>
 
@@ -51,13 +52,10 @@
 
 <p>DevKit是一个自解压文件，建议解压到D:/DevKit，需要注意解压目录中没有中文和空格。解压DevKit后，在命令行输入以下命令来安装：</p>
 
-<p>d:</p>
-
-<p>cd DevKit</p>
-
-<p>ruby dk.rb init</p>
-
-<p>ruby dk.rb install</p>
+<p>d:  <br />
+cd DevKit  <br />
+ruby dk.rb init  <br />
+ruby dk.rb install</p>
 
 <p><strong>安装Python</strong></p>
 
@@ -83,9 +81,9 @@
 
 <p>然后需要安装octopress的依赖项，安装依赖项需要用到Ruby的gem。由于国外的ruby站点经常会被屏蔽，我们使用国内的淘宝镜像作为gem的更新源：</p>
 
-<p>gem sources -r <a href="https://rubygems.org/">https://rubygems.org/</a></p>
+<p>gem sources -r <code>https://rubygems.org/</code></p>
 
-<p>gem sources -a <a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a></p>
+<p>gem sources -a <code>http://ruby.taobao.org/</code></p>
 
 <p>gem sources -l</p>
 
@@ -107,7 +105,9 @@
 
 <p>rake preview</p>
 
-<p>然后在浏览器中输入地址<a href="http://localhost:4000%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E6%95%88%E6%9E%9C%E3%80%82">http://localhost:4000%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E6%95%88%E6%9E%9C%E3%80%82</a></p>
+<p>然后在浏览器中输入地址<a href="http://localhost:4000">http://localhost:4000</a></p>
+
+<p>就可以本地预览效果。</p>
 
 <p><strong>解决中文问题</strong></p>
 
