@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | My Octopress Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-15T22:21:36+08:00</updated>
+  <updated>2015-03-15T22:22:53+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -29,14 +29,14 @@
 
 <p>3) DevKit: <a href="http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></p>
 
+<!-- more -->
+
+
 <p>4) Python: <a href="http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi">http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi</a></p>
 
 <p>5) easy_install: <a href="https://bootstrap.pypa.io/ez_setup.py">https://bootstrap.pypa.io/ez_setup.py</a></font></p>
 
 <p>经过测试，这些软件版本可以安装成功。</p>
-
-<!-- more -->
-
 
 <h2>安装</h2>
 
@@ -109,7 +109,7 @@
 
 <p>就可以本地预览效果。</p>
 
-<p><strong>解决中文问题</strong></p>
+<h2>解决中文问题</h2>
 
 <p>需要在系统中加入如下环境变量：</p>
 
@@ -117,7 +117,7 @@
 
 <p>LC_ALL=zh_CN.UTF-8</p>
 
-<p><strong>在octopress中添加文章</strong></p>
+<h2>在octopress中添加文章</h2>
 
 <p>在命令提示符中进入octopress的安装目录，输入如下命令新建文章：</p>
 
