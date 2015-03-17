@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Memory | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/memory/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-17T15:10:44+08:00</updated>
+  <updated>2015-03-17T15:20:33+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -18,9 +18,7 @@
     <link href="http://zylia.github.io/blog/2015/03/17/virtual-memory/"/>
     <updated>2015-03-17T10:32:30+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/17/virtual-memory</id>
-    <content type="html"><![CDATA[<p>转载链接: <a href="http://www.kerneltravel.net/?p=450">http://www.kerneltravel.net/?p=450</a></p>
-
-<p>mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
+    <content type="html"><![CDATA[<p>mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
 
 <p>[start_code,end_code)表示代码段的地址空间范围。  <br  />
 [start_data,end_start)表示数据段的地址空间范围。  <br  />
@@ -246,6 +244,8 @@ MODULE_AUTHOR("Zou Nan hai");
 module_init(mtest_init);
 module_exit(mtest_exit);
 </code></pre>
+
+<p>转载链接: <a href="http://www.kerneltravel.net/?p=450">http://www.kerneltravel.net/?p=450</a></p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="zylia">
 
   
-  <meta name="description" content="转载链接: http://www.kerneltravel.net/?p=450 mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中： [start_code,end_code)表示代码段的地址空间范围。 [start_data, &hellip;">
+  <meta name="description" content="mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中： [start_code,end_code)表示代码段的地址空间范围。 [start_data,end_start)表示数据段的地址空间范围。 [start_brk,brk) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,9 +87,7 @@
   </header>
 
 
-  <div class="entry-content"><p>转载链接: <a href="http://www.kerneltravel.net/?p=450">http://www.kerneltravel.net/?p=450</a></p>
-
-<p>mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
+  <div class="entry-content"><p>mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
 
 <p>[start_code,end_code)表示代码段的地址空间范围。  <br  />
 [start_data,end_start)表示数据段的地址空间范围。  <br  />

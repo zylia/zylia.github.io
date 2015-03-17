@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-17T15:10:44+08:00</updated>
+  <updated>2015-03-17T15:20:33+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -18,9 +18,7 @@
     <link href="http://zylia.github.io/blog/2015/03/17/virtual-memory/"/>
     <updated>2015-03-17T10:32:30+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/17/virtual-memory</id>
-    <content type="html"><![CDATA[<p>转载链接: <a href="http://www.kerneltravel.net/?p=450">http://www.kerneltravel.net/?p=450</a></p>
-
-<p>mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
+    <content type="html"><![CDATA[<p>mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
 
 <p>[start_code,end_code)表示代码段的地址空间范围。  <br  />
 [start_data,end_start)表示数据段的地址空间范围。  <br  />
@@ -462,6 +460,8 @@ mmap_base表示memory mapping段的起始地址。<strong>那为什么mmap段没
 
 
 <p></p>
+
+<p>转载链接: <a href="http://www.kerneltravel.net/?p=450">http://www.kerneltravel.net/?p=450</a></p>
 ]]></content>
   </entry>
   
