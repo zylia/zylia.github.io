@@ -9,7 +9,7 @@
   <meta name="author" content="zylia">
 
   
-  <meta name="description" content="转载链接: http://www.kerneltravel.net/?p=450 实验内容 在proc文件系统下，建立一个文件，每次向这个文件写入字符时，调用相应的虚拟内存处理函数。 ">
+  <meta name="description" content="转载链接: http://www.kerneltravel.net/?p=450 mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中： [start_code,end_code)表示代码段的地址空间范围。 [start_data, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,9 +89,15 @@
 
   <div class="entry-content"><p>转载链接: <a href="http://www.kerneltravel.net/?p=450">http://www.kerneltravel.net/?p=450</a></p>
 
-<h2>实验内容</h2>
+<p>mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
 
-<p>在proc文件系统下，建立一个文件，每次向这个文件写入字符时，调用相应的虚拟内存处理函数。</p>
+<p>[start_code,end_code)表示代码段的地址空间范围。  <br  />
+[start_data,end_start)表示数据段的地址空间范围。  <br  />
+[start_brk,brk)分别表示heap段的起始空间和当前的heap指针。  <br  />
+[start_stack,end_stack)表示stack段的地址空间范围。  <br  />
+mmap_base表示memory mapping段的起始地址。<strong>那为什么mmap段没有结束的地址呢？</strong></p>
+
+<p>实验内容：在proc文件系统下，建立一个文件，每次向这个文件写入字符时，调用相应的虚拟内存处理函数。</p>
 
 </div>
   
