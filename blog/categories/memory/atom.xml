@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Memory | Zylia's Blog]]></title>
+  <link href="http://zylia.github.io/blog/categories/memory/atom.xml" rel="self"/>
+  <link href="http://zylia.github.io/"/>
+  <updated>2015-03-17T10:49:32+08:00</updated>
+  <id>http://zylia.github.io/</id>
+  <author>
+    <name><![CDATA[zylia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Linux的虚拟内存管理(转载)]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/17/virtual-memory/"/>
+    <updated>2015-03-17T10:32:30+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/17/virtual-memory</id>
+    <content type="html"><![CDATA[<p>转载链接: <a href="http://www.kerneltravel.net/?p=450">http://www.kerneltravel.net/?p=450</a></p>
+
+<h2>实验内容</h2>
+
+<p>在proc文件系统下，建立一个文件，每次向这个文件写入字符时，调用相应的虚拟内存处理函数。</p>
+
+<pre><code>/*
+mtest_dump_vma_list(): 打印出当前进程的各个VMA，这个功能我们简称"listvma"
+mtest_find_vma(): 找出某个虚地址所在的VMA，这个功能我们简称"findvma"
+my_follow_page(): 根据页表，求出某个虚地址所在的物理页面，这个功能我们简称"findpage"
+mtest_write_val(), 在某个地址写上具体数据，这个功能我们简称"writeval".
+*/
+
+#include &lt;linux/module.h&gt;
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/proc_fs.h&gt;
+#include &lt;linux/string.h&gt;
+#include &lt;linux/vmalloc.h&gt;
+#include &lt;asm/uaccess.h&gt;
+#include &lt;linux/init.h&gt;
+#include &lt;linux/slab.h&gt;
+#include &lt;linux/mm.h&gt;
+#include &lt;linux/vmalloc.h&gt;
+MODULE_LICENSE(“GPL”);
+
+/*
+@如何编写代码查看自己的进程到底有哪些虚拟区？
+*/
+
+static void mtest_dump_vma_list(void)
+{
+  struct mm_struct *mm = current-&gt;mm;
+  struct vm_area_struct *vma;
+  printk(“The current process is %s\n”, current-&gt;comm);
+  printk(“mtest_dump_vma_list\n”);
+  down_read(&amp;mm-&gt;mmap_sem);
+  for (vma = mm-&gt;mmap; vma; vma = vma-&gt;vm_next) {
+    printk(“VMA 0x%lx-0x%lx “, vma-&gt;vm_start, vma-&gt;vm_end);
+    if (vma-&gt;vm_flags &amp; VM_WRITE)
+      printk(“WRITE “);
+    if (vma-&gt;vm_flags &amp; VM_READ)
+      printk(“READ “);
+    if (vma-&gt;vm_flags &amp; VM_EXEC)
+      printk(“EXEC “);
+    printk(“\n”);
+  }
+  up_read(&amp;mm-&gt;mmap_sem);
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
