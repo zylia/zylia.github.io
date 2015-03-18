@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Numa | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/numa/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-18T17:40:56+08:00</updated>
+  <updated>2015-03-18T17:57:06+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -18,17 +18,7 @@
     <link href="http://zylia.github.io/blog/2015/03/18/perf-event-open/"/>
     <updated>2015-03-18T16:19:47+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/18/perf-event-open</id>
-    <content type="html"><![CDATA[<h2>概括</h2>
-
-<pre><code>#include &lt;linux/perf_event.h&gt;
-#include &lt;linux/hw_breakpoint.h&gt;
-
-int perf_event_open(struct perf_event_attr *attr,
-                    pid_t pid, int cpu, int group_fd,
-                    unsigned long flags);
-</code></pre>
-
-<p>perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，该描述符可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
+    <content type="html"><![CDATA[<p>perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，该描述符可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
 
 <p>调用perf_event_open()创建一个文件描述符，用来记录性能信息。每个被测量的事件对应一个文件描述符；它们能组合在一起用来同时测量多个事件。</p>
 
@@ -38,6 +28,16 @@ int perf_event_open(struct perf_event_attr *attr,
 <p>启动和关闭性能测量事件对应下面两种方式：ioctl(2)和prctl(2)。当一个事件失效时，它不再记录数据或者产生溢出，但是它仍然存在于内存中并且保持它的记录值。</p>
 
 <p>事件以两种方式被记录：couting和sampled。一个counting事件用来记录事件发生的总的次数。通常情况，counting事件用read(2)系统调用来收集。一个sanmpling事件周期性地写测量数据到一个缓存中，该缓存一般由mmap(2)调用访问。</p>
+
+<h2>概括</h2>
+
+<pre><code>#include &lt;linux/perf_event.h&gt;
+#include &lt;linux/hw_breakpoint.h&gt;
+
+int perf_event_open(struct perf_event_attr *attr,
+                    pid_t pid, int cpu, int group_fd,
+                    unsigned long flags);
+</code></pre>
 
 <h2>参数</h2>
 
