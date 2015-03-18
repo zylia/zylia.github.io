@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-18T20:03:55+08:00</updated>
+  <updated>2015-03-18T20:15:34+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -72,6 +72,10 @@
 <p><strong>PERF_FLAG_FD_CLOEXEC</strong> (since Linux 3.14)</p>
 
 <p>这个标志能使创建的事件文件描述符的close-on-exec标志有效，因此当调用execve(2)时，文件描述符能自动地关闭。应该在文件描述符创建的开始设置close-on-exec标志，而不是后来再用fcntl(2)设置，这能避免潜在的竞争条件，当线程调用perf_event_open()和fcntl(2)发生在和另一个线程调用fork(2)然后执行execve(2)同一时刻的情况。</p>
+
+<p><strong>PERF_FLAG_FD_NO_GROUP</strong></p>
+
+<p>这个标志告诉事件忽略掉<em>group_fd</em>参数，除非是为了使用<strong>PERF_FLAG_FD_OUTPUT</strong>标志重定向输出。</p>
 ]]></content>
   </entry>
   
