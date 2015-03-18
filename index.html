@@ -9,7 +9,14 @@
   <meta name="author" content="zylia">
 
   
-  <meta name="description" content="概括 perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，该描述符可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。 调用perf_event_open()创建一个文件描述符，用来记录性能信息。 &hellip;">
+  <meta name="description" content="概括 1
+2
+3
+4
+5
+6
+#include &lt;linux/perf_event.h&gt;
+#include &lt;linux/hw_breakpoint.h&gt; int perf_event_open(struct perf_event_attr *attr, pid_t pid &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,6 +95,20 @@
 
 
   <div class="entry-content"><h2>概括</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;linux/perf_event.h&gt;
+</span><span class='line'>#include &lt;linux/hw_breakpoint.h&gt;
+</span><span class='line'>
+</span><span class='line'>int perf_event_open(struct perf_event_attr *attr,
+</span><span class='line'>                    pid_t pid, int cpu, int group_fd,
+</span><span class='line'>                    unsigned long flags);</span></code></pre></td></tr></table></div></figure>
+
 
 <p>perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，该描述符可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
 

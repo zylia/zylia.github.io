@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-18T17:34:11+08:00</updated>
+  <updated>2015-03-18T17:40:56+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -19,6 +19,20 @@
     <updated>2015-03-18T16:19:47+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/18/perf-event-open</id>
     <content type="html"><![CDATA[<h2>概括</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;linux/perf_event.h&gt;
+</span><span class='line'>#include &lt;linux/hw_breakpoint.h&gt;
+</span><span class='line'>
+</span><span class='line'>int perf_event_open(struct perf_event_attr *attr,
+</span><span class='line'>                    pid_t pid, int cpu, int group_fd,
+</span><span class='line'>                    unsigned long flags);</span></code></pre></td></tr></table></div></figure>
+
 
 <p>perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，该描述符可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
 
@@ -48,7 +62,7 @@
     用来监控位于特定CPU上的特定进程/线程。</p>
 
 <p><strong>pid = -1 和 cpu >= 0</strong>  <br />
-    用来监控在特定CPU上的所有进程/线程。这需要 <strong>CAP_SYS_ADMIN</strong>特性或者 /proc/sys/kernel/perf_event_paranoid值小于1。</p>
+用来监控在特定CPU上的所有进程/线程。这需要 <strong>CAP_SYS_ADMIN</strong>特性或者 /proc/sys/kernel/perf_event_paranoid值小于1。</p>
 ]]></content>
   </entry>
   
