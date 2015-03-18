@@ -94,6 +94,22 @@
 <p>启动和关闭性能测量事件对应下面两种方式：ioctl(2)和prctl(2)。当一个事件失效时，它不再记录数据或者产生溢出，但是它仍然存在于内存中并且保持它的记录值。</p>
 
 <p>事件以两种方式被记录：couting和sampled。一个counting事件用来记录事件发生的总的次数。通常情况，counting事件用read(2)系统调用来收集。一个sanmpling事件周期性地写测量数据到一个缓存中，该缓存一般由mmap(2)调用访问。</p>
+
+<p><strong>参数</strong></p>
+
+<p><em>pid</em>和<em>cpu</em>参数用来描述监控哪个进程和CPU:</p>
+
+<p><strong>pid = 0 和 cpu = -1</strong>  <br />
+    用来监控位于任何CPU上的调用进程/线程.</p>
+
+<p><strong>pid = 0 和 cpu >= 0</strong>  <br />
+    用来监控位于特定CPU上的调用进程/线程.</p>
+
+<p><strong>pid > 0 和 cpu = -1</strong>  <br />
+    用来监控位于任何CPU上的特定进程/线程.</p>
+
+<p><strong>pid > 0 和 cpu >= 0</strong>  <br />
+    用来监控位于特定CPU上的特定进程/线程.</p>
 </div>
 
 
