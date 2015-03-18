@@ -9,7 +9,8 @@
   <meta name="author" content="zylia">
 
   
-  <meta name="description" content="&ldquo;MemProf: a Memory Profiler for NUMA Multicore Systems"是发表在计算机系统领域顶级会议USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分析工具， &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +72,36 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/18/memprof/">在NUMA架构上的并行程序性能分析工具MemProf</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/03/18/perf-event-open/">Perf_event_open</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-18T16:19:47+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:19 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/18/memprof/">NUMA架构的程序性能分析工具MemProf</a></h1>
     
     
       <p class="meta">
@@ -89,9 +119,12 @@
 
   <div class="entry-content"><p>&ldquo;MemProf: a Memory Profiler for NUMA Multicore Systems&#8221;是发表在计算机系统领域顶级会议USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分析工具，能够建立线程和内存对象之间的交互信息，帮助程序员理解为什么和哪些内存对象是远端访问。</p>
 
-<p>应用程序级别的优化技术有以下一些缺点；对于程序员来说很难决定一个给定的程序/工作集可以用哪些优化策略。我们需要知道线程和内存对象之间的交互信息，例如，在程序运行的任何时刻点知道哪些线程访问哪些内存对象，以及每次内存访问请求的发送和接受节点的详细信息。然而，现有的分析工具，例如OProfile，Linux Perf，VTune和Memphis都无法提供这些信息。这些工具有些能够提供全局静态内存对象的信息，但是这些对象只占据了所有远端内存访问的很小一部分比例。作者做实验发现这些全局静态内存对象只占用了少于4%的总远端访问次数。对于其他内存对象，现有的分析工具只提供了目标内存地址和触发该访问的程序指令。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/03/18/memprof/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -215,7 +248,11 @@ mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的�
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/03/18/memprof/">在NUMA架构上的并行程序性能分析工具MemProf</a>
+        <a href="/blog/2015/03/18/perf-event-open/">Perf_event_open</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/18/memprof/">NUMA架构的程序性能分析工具MemProf</a>
       </li>
     
       <li class="post">
