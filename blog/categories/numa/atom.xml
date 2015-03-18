@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Numa | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/numa/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-18T15:34:56+08:00</updated>
+  <updated>2015-03-18T15:45:41+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -14,11 +14,22 @@
 
   
   <entry>
+    <title type="html"><![CDATA[MemProf]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/18/memprof/"/>
+    <updated>2015-03-18T15:40:50+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/18/memprof</id>
+    <content type="html"><![CDATA[<p>&ldquo;MemProf: a Memory Profiler for NUMA Multicore Systems&#8221;是发表在计算机系统领域顶级会议
+USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分析工具，能够建立线程和
+内存对象之间的交互信息，帮助程序员理解为什么和哪些内存对象是远端访问。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[A NUMA Performance Tool]]></title>
     <link href="http://zylia.github.io/blog/2015/03/18/a-numa-performance-tool/"/>
     <updated>2015-03-18T15:32:22+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/18/a-numa-performance-tool</id>
-    <content type="html"><![CDATA[<p>&ldquo;A Tool to Analyze the Performance of Multithreaded Programs on NUMA Architectures&#8221;是发表在计算机系统领域顶级会议PPoPP 14上的文章</p>
+    <content type="html"><![CDATA[<p>&ldquo;A Tool to Analyze the Performance of Multithreaded Programs on NUMA Architectures&#8221;是发表在计算机系统领域顶级会议PPoPP 14上的文章。程序员需要编写出能感知NUMA架构的代码。</p>
 ]]></content>
   </entry>
   
