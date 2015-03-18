@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Numa | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/numa/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-18T20:15:34+08:00</updated>
+  <updated>2015-03-18T21:16:19+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -69,7 +69,15 @@ int perf_event_open(struct perf_event_attr *attr,
 
 <p><strong>PERF_FLAG_FD_NO_GROUP</strong></p>
 
-<p>这个标志告诉事件忽略掉<em>group_fd</em>参数，除非是为了使用<strong>PERF_FLAG_FD_OUTPUT</strong>标志重定向输出。</p>
+<p>这个标志告诉事件忽略掉<em>group_fd</em>参数，除非是出现使用<strong>PERF_FLAG_FD_OUTPUT</strong>标志重定向输出的情况。</p>
+
+<p><strong>PERF_FLAG_FD_OUTPUT</strong> (broken since Linux 2.6.35)</p>
+
+<p>这个标志重新定位事件的采样输出，而不是按照惯例输出到由<em>group_fd</em>指定事件的mmap缓存中。</p>
+
+<p><strong>PERF_FLAG_PID_CGROUP</strong> (since Linux 2.6.39)</p>
+
+<p>这个标志激活了每个容器的系统范围的监控。一个容器是一系列为了更细化控制而隔离出来的资源的抽象(CPUs, memory等等)。在这个模式下，只有当线程运行在属于被指定的容器中的CPU上(cgroup)。</p>
 ]]></content>
   </entry>
   
