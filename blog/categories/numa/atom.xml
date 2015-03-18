@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Numa | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/numa/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-18T15:56:50+08:00</updated>
+  <updated>2015-03-18T16:04:01+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -23,16 +23,9 @@ USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分�
 内存对象之间的交互信息，帮助程序员理解为什么和哪些内存对象是远端访问。</p>
 
 <p>应用程序级别的优化技术有以下一些缺点；对于程序员来说很难决定一个给定的程序/工作集可以
-用哪些优化策略。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A NUMA Performance Tool]]></title>
-    <link href="http://zylia.github.io/blog/2015/03/18/a-numa-performance-tool/"/>
-    <updated>2015-03-18T15:32:22+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/03/18/a-numa-performance-tool</id>
-    <content type="html"><![CDATA[<p>&ldquo;A Tool to Analyze the Performance of Multithreaded Programs on NUMA Architectures&#8221;是发表在计算机系统领域顶级会议PPoPP 14上的文章。程序员需要编写出能感知NUMA架构的代码。</p>
+用哪些优化策略。我们需要知道线程和内存对象之间的交互信息，例如，在程序运行的任何时刻点
+知道哪些线程访问哪些内存对象，以及每次内存访问请求的发送和接受节点的详细信息。然而，现
+有的分析工具，例如OProfile，Linux Perf，VTune和Memphis都无法提供这些信息。</p>
 ]]></content>
   </entry>
   

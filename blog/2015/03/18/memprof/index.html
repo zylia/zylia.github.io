@@ -90,7 +90,9 @@ USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分�
 内存对象之间的交互信息，帮助程序员理解为什么和哪些内存对象是远端访问。</p>
 
 <p>应用程序级别的优化技术有以下一些缺点；对于程序员来说很难决定一个给定的程序/工作集可以
-用哪些优化策略。</p>
+用哪些优化策略。我们需要知道线程和内存对象之间的交互信息，例如，在程序运行的任何时刻点
+知道哪些线程访问哪些内存对象，以及每次内存访问请求的发送和接受节点的详细信息。然而，现
+有的分析工具，例如OProfile，Linux Perf，VTune和Memphis都无法提供这些信息。</p>
 </div>
 
 
@@ -146,7 +148,7 @@ USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/03/18/a-numa-performance-tool/" title="Previous Post: a NUMA performance tool">&laquo; a NUMA performance tool</a>
+        <a class="basic-alignment left" href="/blog/2015/03/17/virtual-memory/" title="Previous Post: linux的虚拟内存管理(转载)">&laquo; linux的虚拟内存管理(转载)</a>
       
       
     </p>
@@ -170,10 +172,6 @@ USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分�
       </li>
     
       <li class="post">
-        <a href="/blog/2015/03/18/a-numa-performance-tool/">A NUMA Performance Tool</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2015/03/17/virtual-memory/">Linux的虚拟内存管理(转载)</a>
       </li>
     
@@ -192,7 +190,7 @@ USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分�
   <ul id="categories">
     <li class='category'><a href='/blog/categories/life/'>life (1)</a></li>
 <li class='category'><a href='/blog/categories/memory/'>memory (1)</a></li>
-<li class='category'><a href='/blog/categories/numa/'>numa (2)</a></li>
+<li class='category'><a href='/blog/categories/numa/'>numa (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
  
   </ul>
