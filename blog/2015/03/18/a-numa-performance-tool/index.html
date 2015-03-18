@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Zylia&#8217;s Blog</title>
+  <title>A NUMA Performance Tool - Zylia&#8217;s Blog</title>
   <meta name="author" content="zylia">
 
   
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://zylia.github.io/">
+  <link rel="canonical" href="http://zylia.github.io/blog/2015/03/18/a-numa-performance-tool/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Zylia's Blog" type="application/atom+xml">
@@ -64,15 +64,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/18/a-numa-performance-tool/">A NUMA Performance Tool</a></h1>
+      <h1 class="entry-title">A NUMA Performance Tool</h1>
     
     
       <p class="meta">
@@ -88,129 +85,71 @@
   </header>
 
 
-  <div class="entry-content"><p>&ldquo;A Tool to Analyze the Performance of Multithreaded Programs on NUMA Architectures&#8221;是发表在计算机系统领域顶级会议PPoPP 14上的文章</p>
+<div class="entry-content"><p>&ldquo;A Tool to Analyze the Performance of Multithreaded Programs on NUMA Architectures&#8221;是发表在计算机系统领域顶级会议PPoPP 14上的文章</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/17/virtual-memory/">Linux的虚拟内存管理(转载)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-17T10:32:30+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:32 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>一个进程的虚拟地址空间主要由两个数据结来描述。一个是最高层次的：mm_struct，一个是较高层次的：vm_area_struct。
-最高层次的mm_struct结构描述了一个进程的整个虚拟地址空间。较高层次的结构vm_area_struct描述了虚拟地址空间的一个区间（简称虚拟区）。
-mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
-
-<p>[start_code,end_code)表示代码段的地址空间范围。  <br  />
-[start_data,end_start)表示数据段的地址空间范围。  <br  />
-[start_brk,brk)分别表示heap段的起始空间和当前的heap指针。  <br  />
-[start_stack,end_stack)表示stack段的地址空间范围。  <br  />
-mmap_base表示memory mapping段的起始地址。<strong>那为什么mmap段没有结束的地址呢？</strong></p>
-
-<p>实验内容：在proc文件系统下，建立一个文件，每次向这个文件写入字符时，调用相应的虚拟内存处理函数。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/03/17/virtual-memory/">Read on &rarr;</a>
-    </footer>
   
 
+<span class="byline author vcard">Posted by <span class="fn">zylia</span></span>
 
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/14/test/">Window 7配置octopress</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
 
-<time class='entry-date' datetime='2015-03-14T14:23:07+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:23 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>受一位同仁经常用octopress写博客的启发，我也准备搭个博客。</p>
-
-<p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/03/14/test/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time class='entry-date' datetime='2015-03-18T15:32:22+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:32 pm</span></time>
       
-  <header>
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/numa/'>numa</a>
+  
+</span>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/14/new-home/">我的新家</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-14T14:03:41+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:03 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>这是我的新家，欢迎大家多踩踩。</p>
+      <div class="sharing">
+  
+      <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
 </div>
-  
-  
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1354240483289311" charset="utf-8"></script>
+<!-- JiaThis Button END -->
 
-
-    </article>
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+<!-- UY END -->
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/03/17/virtual-memory/" title="Previous Post: linux的虚拟内存管理(转载)">&laquo; linux的虚拟内存管理(转载)</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -262,6 +201,7 @@ mmap_base表示memory mapping段的起始地址。<strong>那为什么mmap段没
 </html>
   
 </aside>
+
 
     </div>
   </div>

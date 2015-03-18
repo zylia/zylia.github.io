@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-17T15:20:33+08:00</updated>
+  <updated>2015-03-18T15:34:56+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -14,11 +14,22 @@
 
   
   <entry>
+    <title type="html"><![CDATA[A NUMA Performance Tool]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/18/a-numa-performance-tool/"/>
+    <updated>2015-03-18T15:32:22+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/18/a-numa-performance-tool</id>
+    <content type="html"><![CDATA[<p>&ldquo;A Tool to Analyze the Performance of Multithreaded Programs on NUMA Architectures&#8221;是发表在计算机系统领域顶级会议PPoPP 14上的文章</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Linux的虚拟内存管理(转载)]]></title>
     <link href="http://zylia.github.io/blog/2015/03/17/virtual-memory/"/>
     <updated>2015-03-17T10:32:30+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/17/virtual-memory</id>
-    <content type="html"><![CDATA[<p>mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
+    <content type="html"><![CDATA[<p>一个进程的虚拟地址空间主要由两个数据结来描述。一个是最高层次的：mm_struct，一个是较高层次的：vm_area_struct。
+最高层次的mm_struct结构描述了一个进程的整个虚拟地址空间。较高层次的结构vm_area_struct描述了虚拟地址空间的一个区间（简称虚拟区）。
+mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
 
 <p>[start_code,end_code)表示代码段的地址空间范围。  <br  />
 [start_data,end_start)表示数据段的地址空间范围。  <br  />
