@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-18T16:25:15+08:00</updated>
+  <updated>2015-03-18T16:34:32+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -19,6 +19,13 @@
     <updated>2015-03-18T16:19:47+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/18/perf-event-open</id>
     <content type="html"><![CDATA[<p>perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
+
+<p>调用perf_event_open()创建一个文件描述符，用来测量性能信息。每个被测量的事件对应一个文件描述符；它们能组合在一起用来同时测量多个事件。</p>
+
+<!-- more -->
+
+
+<p>启动和关闭性能测量事件对应下面两种方式：ioctl(2)和prctl(2)。当一个事件失效时，它不再记录数据或者产生溢出，但是它仍然存在于内存中并且保持它的记录值。</p>
 ]]></content>
   </entry>
   
