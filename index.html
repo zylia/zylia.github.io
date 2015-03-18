@@ -9,8 +9,7 @@
   <meta name="author" content="zylia">
 
   
-  <meta name="description" content="&ldquo;MemProf: a Memory Profiler for NUMA Multicore Systems"是发表在计算机系统领域顶级会议
-USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分析工具，能够建立线程和 &hellip;">
+  <meta name="description" content="&ldquo;MemProf: a Memory Profiler for NUMA Multicore Systems"是发表在计算机系统领域顶级会议USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分析工具， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,7 +71,7 @@ USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分�
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/18/memprof/">MemProf</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/03/18/memprof/">在NUMA架构上的并行程序性能分析工具MemProf</a></h1>
     
     
       <p class="meta">
@@ -88,14 +87,9 @@ USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分�
   </header>
 
 
-  <div class="entry-content"><p>&ldquo;MemProf: a Memory Profiler for NUMA Multicore Systems&#8221;是发表在计算机系统领域顶级会议
-USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分析工具，能够建立线程和
-内存对象之间的交互信息，帮助程序员理解为什么和哪些内存对象是远端访问。</p>
+  <div class="entry-content"><p>&ldquo;MemProf: a Memory Profiler for NUMA Multicore Systems&#8221;是发表在计算机系统领域顶级会议USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分析工具，能够建立线程和内存对象之间的交互信息，帮助程序员理解为什么和哪些内存对象是远端访问。</p>
 
-<p>应用程序级别的优化技术有以下一些缺点；对于程序员来说很难决定一个给定的程序/工作集可以
-用哪些优化策略。我们需要知道线程和内存对象之间的交互信息，例如，在程序运行的任何时刻点
-知道哪些线程访问哪些内存对象，以及每次内存访问请求的发送和接受节点的详细信息。然而，现
-有的分析工具，例如OProfile，Linux Perf，VTune和Memphis都无法提供这些信息。</p>
+<p>应用程序级别的优化技术有以下一些缺点；对于程序员来说很难决定一个给定的程序/工作集可以用哪些优化策略。我们需要知道线程和内存对象之间的交互信息，例如，在程序运行的任何时刻点知道哪些线程访问哪些内存对象，以及每次内存访问请求的发送和接受节点的详细信息。然而，现有的分析工具，例如OProfile，Linux Perf，VTune和Memphis都无法提供这些信息。这些工具有些能够提供全局静态内存对象的信息，但是这些对象只占据了所有远端内存访问的很小一部分比例。作者做实验发现这些全局静态内存对象只占用了少于4%的总远端访问次数。对于其他内存对象，现有的分析工具只提供了目标内存地址和触发该访问的程序指令。</p>
 </div>
   
   
@@ -127,14 +121,6 @@ USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分�
   <div class="entry-content"><p>一个进程的虚拟地址空间主要由两个数据结来描述。一个是最高层次的：mm_struct，一个是较高层次的：vm_area_struct。
 最高层次的mm_struct结构描述了一个进程的整个虚拟地址空间。较高层次的结构vm_area_struct描述了虚拟地址空间的一个区间（简称虚拟区）。
 mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
-
-<p>[start_code,end_code)表示代码段的地址空间范围。  <br  />
-[start_data,end_start)表示数据段的地址空间范围。  <br  />
-[start_brk,brk)分别表示heap段的起始空间和当前的heap指针。  <br  />
-[start_stack,end_stack)表示stack段的地址空间范围。  <br  />
-mmap_base表示memory mapping段的起始地址。<strong>那为什么mmap段没有结束的地址呢？</strong></p>
-
-<p>实验内容：在proc文件系统下，建立一个文件，每次向这个文件写入字符时，调用相应的虚拟内存处理函数。</p>
 
 </div>
   
@@ -229,7 +215,7 @@ mmap_base表示memory mapping段的起始地址。<strong>那为什么mmap段没
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/03/18/memprof/">MemProf</a>
+        <a href="/blog/2015/03/18/memprof/">在NUMA架构上的并行程序性能分析工具MemProf</a>
       </li>
     
       <li class="post">

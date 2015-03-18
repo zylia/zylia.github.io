@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Memory | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/memory/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-18T16:04:01+08:00</updated>
+  <updated>2015-03-18T16:17:18+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -22,6 +22,9 @@
 最高层次的mm_struct结构描述了一个进程的整个虚拟地址空间。较高层次的结构vm_area_struct描述了虚拟地址空间的一个区间（简称虚拟区）。
 mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
 
+<!-- more -->
+
+
 <p>[start_code,end_code)表示代码段的地址空间范围。  <br  />
 [start_data,end_start)表示数据段的地址空间范围。  <br  />
 [start_brk,brk)分别表示heap段的起始空间和当前的heap指针。  <br  />
@@ -29,9 +32,6 @@ mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的�
 mmap_base表示memory mapping段的起始地址。<strong>那为什么mmap段没有结束的地址呢？</strong></p>
 
 <p>实验内容：在proc文件系统下，建立一个文件，每次向这个文件写入字符时，调用相应的虚拟内存处理函数。</p>
-
-<!-- more -->
-
 
 <pre><code>/*
 mtest_dump_vma_list():print each VMA of current process, we call this function ”listvma”
