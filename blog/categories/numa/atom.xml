@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Numa | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/numa/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-18T17:03:34+08:00</updated>
+  <updated>2015-03-18T17:34:11+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -18,9 +18,11 @@
     <link href="http://zylia.github.io/blog/2015/03/18/perf-event-open/"/>
     <updated>2015-03-18T16:19:47+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/18/perf-event-open</id>
-    <content type="html"><![CDATA[<p>perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
+    <content type="html"><![CDATA[<h2>概括</h2>
 
-<p>调用perf_event_open()创建一个文件描述符，用来测量性能信息。每个被测量的事件对应一个文件描述符；它们能组合在一起用来同时测量多个事件。</p>
+<p>perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，该描述符可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
+
+<p>调用perf_event_open()创建一个文件描述符，用来记录性能信息。每个被测量的事件对应一个文件描述符；它们能组合在一起用来同时测量多个事件。</p>
 
 <!-- more -->
 
@@ -29,21 +31,24 @@
 
 <p>事件以两种方式被记录：couting和sampled。一个counting事件用来记录事件发生的总的次数。通常情况，counting事件用read(2)系统调用来收集。一个sanmpling事件周期性地写测量数据到一个缓存中，该缓存一般由mmap(2)调用访问。</p>
 
-<p><strong>参数</strong></p>
+<h2>参数</h2>
 
 <p><em>pid</em>和<em>cpu</em>参数用来描述监控哪个进程和CPU:</p>
 
 <p><strong>pid = 0 和 cpu = -1</strong>  <br />
-    用来监控位于任何CPU上的调用进程/线程.</p>
+    用来监控位于任何CPU上的调用进程/线程。</p>
 
 <p><strong>pid = 0 和 cpu >= 0</strong>  <br />
-    用来监控位于特定CPU上的调用进程/线程.</p>
+    用来监控位于特定CPU上的调用进程/线程。</p>
 
 <p><strong>pid > 0 和 cpu = -1</strong>  <br />
-    用来监控位于任何CPU上的特定进程/线程.</p>
+    用来监控位于任何CPU上的特定进程/线程。</p>
 
 <p><strong>pid > 0 和 cpu >= 0</strong>  <br />
-    用来监控位于特定CPU上的特定进程/线程.</p>
+    用来监控位于特定CPU上的特定进程/线程。</p>
+
+<p><strong>pid = -1 和 cpu >= 0</strong>  <br />
+    用来监控在特定CPU上的所有进程/线程。这需要 <strong>CAP_SYS_ADMIN</strong>特性或者 /proc/sys/kernel/perf_event_paranoid值小于1。</p>
 ]]></content>
   </entry>
   

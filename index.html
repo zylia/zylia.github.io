@@ -9,7 +9,7 @@
   <meta name="author" content="zylia">
 
   
-  <meta name="description" content="perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。 调用perf_event_open()创建一个文件描述符，用来测量性能信息。 &hellip;">
+  <meta name="description" content="概括 perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，该描述符可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。 调用perf_event_open()创建一个文件描述符，用来记录性能信息。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,9 +87,11 @@
   </header>
 
 
-  <div class="entry-content"><p>perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
+  <div class="entry-content"><h2>概括</h2>
 
-<p>调用perf_event_open()创建一个文件描述符，用来测量性能信息。每个被测量的事件对应一个文件描述符；它们能组合在一起用来同时测量多个事件。</p>
+<p>perf_event_open是用来设置intel的性能监控。perf_event_open()返回一个文件描述符，该描述符可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
+
+<p>调用perf_event_open()创建一个文件描述符，用来记录性能信息。每个被测量的事件对应一个文件描述符；它们能组合在一起用来同时测量多个事件。</p>
 
 </div>
   
