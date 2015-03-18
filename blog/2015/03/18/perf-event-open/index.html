@@ -131,7 +131,13 @@
 用来监控在特定CPU上的所有进程/线程。这需要 <strong>CAP_SYS_ADMIN</strong>特性或者 /proc/sys/kernel/perf_event_paranoid值小于1。</p>
 
 <p><strong>pid = -1 和 cpu = -1</strong>  <br />
-这个设置是无效的并会返回错误。<em>group_fd</em>参数允许建立事件组。一个事件组有一个事件被称为组长。首先建立组长，他的<em>group_id</em> = -1。接下来剩下的组员会用组长的文件描述符作为<em>group_fd</em>用<strong>perf_event_open()</strong>建立。(单一事件将会以<em>group_fd</em> = -1来设定，并且认为该组只有一个成员)。一个事件组做为一个整体调度到CPU上：只有所有组内的事件都能被放在同一CPU上它才会放置在CPU上。这以为着组员事件的数值互相比较是有意义的&mdash;相加，相除，等等&mdash;因为他们是执行相同指令时的事件统计值。<em>flags</em>参数由ORing和以下数值的0个或者多个组成：</p>
+这个设置是无效的并会返回错误。<em>group_fd</em>参数允许建立事件组。一个事件组有一个事件被称为组长。首先建立组长，他的<em>group_id</em> = -1。接下来剩下的组员会用组长的文件描述符作为<em>group_fd</em>并用<strong>perf_event_open()</strong>建立。(单一事件将会以<em>group_fd</em> = -1来设定，并且认为该组只有一个成员)。一个事件组做为一个整体调度到CPU上：只有所有组内的事件都能被放在同一CPU上它才会放置在CPU上。这以为着组员事件的数值互相比较是有意义的&mdash;相加，相除，等等&mdash;因为他们是执行相同指令时的事件统计值。</p>
+
+<p><em>flags</em>参数由ORing和以下数值的0个或者多个组成：</p>
+
+<p><strong>PERF_FLAG_FD_CLOEXEC</strong> (since Linux 3.14)</p>
+
+<p>这个标志能使创建的事件文件描述符的close-on-exec标志有效，因此当调用execve(2)时，文件描述符能自动地关闭。应该在文件描述符创建的开始设置close-on-exec标志，而不是后来再用fcntl(2)设置，这能避免潜在的竞争条件，当线程调用perf_event_open()和fcntl(2)发生在和另一个线程调用fork(2)然后执行execve(2)同一时刻的情况。</p>
 </div>
 
 
