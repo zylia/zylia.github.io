@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Numa | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/numa/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-19T17:25:44+08:00</updated>
+  <updated>2015-03-19T17:29:15+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -157,18 +157,13 @@ int perf_event_open(struct perf_event_attr *attr,
 
 <p><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</p>
 
-<p><font size=2>
-　　<strong>PERF_TYPE_HARDWARE</strong></p>
-
-<p>　　<strong>PERF_TYPE_SOFTWARE</strong></p>
-
-<p>　　<strong>PERF_TYPE_TRACEPOINT</strong></p>
-
-<p>　　<strong>PERF_TYPE_HW_CACHE</strong></p>
-
-<p>　　<strong>PERF_TYPE_RAW</strong></p>
-
-<p>　　<strong>PERF_TYPE_BREAKPOINT</strong></font></p>
+<p><font size=3>
+　　<strong>PERF_TYPE_HARDWARE</strong>  <br />
+　　<strong>PERF_TYPE_SOFTWARE</strong>  <br />
+　　<strong>PERF_TYPE_TRACEPOINT</strong>  <br />
+　　<strong>PERF_TYPE_HW_CACHE</strong>  <br />
+　　<strong>PERF_TYPE_RAW</strong>  <br />
+　　<strong>PERF_TYPE_BREAKPOINT</strong></font></p>
 
 <p>2)<em>size</em>域设置</p>
 
@@ -182,45 +177,29 @@ int perf_event_open(struct perf_event_attr *attr,
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_HARDWARE</strong>，我们在测量普通的CPU硬件事件。并不是这些事件都适合所有的平台。设置<em>config</em>为下面值的其中之一：</p>
 
-<p><font size=2>
-　　<strong>PERF_COUNT_HW_CPU_CYCLES</strong></p>
-
-<p>　　<strong>PERF_COUNT_HW_INSTRUCTIONS</strong></p>
-
-<p>　　<strong>PERF_COUNT_HW_CACHE_REFERENCES</strong></p>
-
-<p>　　<strong>PERF_COUNT_HW_CACHE_MISSES</strong></p>
-
-<p>　　<strong>PERF_COUNT_HW_BRANCH_INSTRUCTIONS</strong></p>
-
-<p>　　<strong>PERF_COUNT_HW_BRANCH_MISSES</strong></p>
-
-<p>　　<strong>PERF_COUNT_HW_BUS_CYCLES</strong></p>
-
-<p>　　<strong>PERF_COUNT_HW_STALLED_CYCLES_FRONTEND</strong>：在发送指令时的延迟。</p>
-
-<p>　　<strong>PERF_COUNT_HW_STALLED_CYCLES_BACKEND</strong>：指令执行完后的延迟。</p>
-
-<p>　　<strong>PERF_COUNT_HW_REF_CPU_CYCLES</strong></font></p>
+<p><font size=3>
+　　<strong>PERF_COUNT_HW_CPU_CYCLES</strong>  <br />
+　　<strong>PERF_COUNT_HW_INSTRUCTIONS</strong>  <br />
+　　<strong>PERF_COUNT_HW_CACHE_REFERENCES</strong>  <br />
+　　<strong>PERF_COUNT_HW_CACHE_MISSES</strong>  <br />
+　　<strong>PERF_COUNT_HW_BRANCH_INSTRUCTIONS</strong>  <br />
+　　<strong>PERF_COUNT_HW_BRANCH_MISSES</strong>  <br />
+　　<strong>PERF_COUNT_HW_BUS_CYCLES</strong>  <br />
+　　<strong>PERF_COUNT_HW_STALLED_CYCLES_FRONTEND</strong>：在发送指令时的延迟。  <br />
+　　<strong>PERF_COUNT_HW_STALLED_CYCLES_BACKEND</strong>：指令执行完后的延迟。  <br />
+　　<strong>PERF_COUNT_HW_REF_CPU_CYCLES</strong></font></p>
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_SOFTWARE</strong>，我们在测量内核提供的软件事件。设置<em>config</em>为以下几种类型之一：</p>
 
-<p><font size=2>
-　　<strong>PERF_COUNT_SW_CPU_CLOCK</strong></p>
-
-<p>　　<strong>PERF_COUNT_SW_TASK_CLOCK</strong></p>
-
-<p>　　<strong>PERF_COUNT_SW_PAGE_FAULTS</strong></p>
-
-<p>　　<strong>PERF_COUNT_SW_CONTEXT_SWITCHES</strong></p>
-
-<p>　　<strong>PERF_COUNT_SW_CPU_MIGRATIONS</strong></p>
-
-<p>　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MIN</strong></p>
-
-<p>　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MAJ</strong></font></p>
-
-<p>　　等等。</p>
+<p><font size=3>
+　　<strong>PERF_COUNT_SW_CPU_CLOCK</strong>  <br />
+　　<strong>PERF_COUNT_SW_TASK_CLOCK</strong>  <br />
+　　<strong>PERF_COUNT_SW_PAGE_FAULTS</strong>  <br />
+　　<strong>PERF_COUNT_SW_CONTEXT_SWITCHES</strong>  <br />
+　　<strong>PERF_COUNT_SW_CPU_MIGRATIONS</strong>  <br />
+　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MIN</strong>  <br />
+　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MAJ</strong></font>
+　　等等。</p>
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_RAW</strong>，那么需要一个定制的“raw” config值。大多数CPU支持的事件不包含在普通事件中。它们是由实现定义的；参照你的CPU手册(例如Intel Volume 3B文档)。libpfm4库能够用来转换体系结构手册里的名字到perf_event_open()在这个域中想要的十六进制值。</p>
 
