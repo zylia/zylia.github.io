@@ -360,6 +360,78 @@
 <h3><em>sample_type</em>域设置</h3>
 
 <p>用来描述sample中包含哪些值。</p>
+
+<h2>读取结果</h2>
+
+<h3>以计数模式运行的情况</h3>
+
+<p>当<strong>perf_event_open()</strong>文件描述符被打开后，事件的值能够从文件描述符中读取。这个值通过<em>attr</em>结构体的<em>read_format</em>域设定。</p>
+
+<p>如果你想要存储的缓存无法放下所有的数据，将会返回<strong>ENOSPC</strong>。</p>
+
+<h3>以采样模式运行的情况</h3>
+
+<p>当以采样模式使用<strong>perf_event_open()</strong>时，事件的结果记录在一个环形缓存中。该环形缓存用mmap(2)创建和访问。</p>
+
+<p>mmap的大小应该是1+2<sup>n</sup> 页，第一个页是metadata页(<em>struct perf_event_mmap_page</em>)，它包括环形缓存在内存中起始位置的信息。</p>
+
+<p>第一个metadata mmap页的结构如下所示：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct perf_event_mmap_page {
+</span><span class='line'>               __u32 version;        /* version number of this structure */
+</span><span class='line'>               __u32 compat_version; /* lowest version this is compat with */
+</span><span class='line'>               __u32 lock;           /* seqlock for synchronization */
+</span><span class='line'>               __u32 index;          /* hardware counter identifier */
+</span><span class='line'>               __s64 offset;         /* add to hardware counter value */
+</span><span class='line'>               __u64 time_enabled;   /* time event active */
+</span><span class='line'>               __u64 time_running;   /* time event on CPU */
+</span><span class='line'>               union {
+</span><span class='line'>                   __u64   capabilities;
+</span><span class='line'>                   struct {
+</span><span class='line'>                       __u64 cap_usr_time / cap_usr_rdpmc / cap_bit0 : 1,
+</span><span class='line'>                             cap_bit0_is_deprecated : 1,
+</span><span class='line'>                             cap_user_rdpmc         : 1,
+</span><span class='line'>                             cap_user_time          : 1,
+</span><span class='line'>                             cap_user_time_zero     : 1,
+</span><span class='line'>                   };
+</span><span class='line'>               };
+</span><span class='line'>               __u16 pmc_width;
+</span><span class='line'>               __u16 time_shift;
+</span><span class='line'>               __u32 time_mult;：
+</span><span class='line'>               __u64 time_offset;
+</span><span class='line'>               __u64 __reserved[120];   /* Pad to 1k */
+</span><span class='line'>               __u64 data_head;         /* head in the data section */
+</span><span class='line'>               __u64 data_tail;         /* user-space written tail */
+</span><span class='line'>           }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>剩下的2<sup>n</sup>环形缓存页具有如下所示的布局。</p>
 </div>
 
 
