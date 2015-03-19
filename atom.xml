@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-19T09:29:18+08:00</updated>
+  <updated>2015-03-19T09:39:23+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -217,7 +217,21 @@
 </span><span class='line'>           };</span></code></pre></td></tr></table></div></figure>
 
 
+<p><em>perf_event_attr</em>中的各个域描述如下：</p>
 
+<p><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</p>
+
+<p>-<strong>PERF_TYPE_HARDWARE</strong></p>
+
+<p>-<strong>PERF_TYPE_SOFTWARE</strong></p>
+
+<p>-<strong>PERF_TYPE_TRACEPOINT</strong></p>
+
+<p>-<strong>PERF_TYPE_HW_CACHE</strong></p>
+
+<p>-<strong>PERF_TYPE_RAW</strong></p>
+
+<p>-<strong>PERF_TYPE_BREAKPOINT</strong></p>
 ]]></content>
   </entry>
   
