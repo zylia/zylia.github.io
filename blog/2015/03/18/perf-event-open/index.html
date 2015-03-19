@@ -150,6 +150,140 @@
 <p><strong>PERF_FLAG_PID_CGROUP</strong> (since Linux 2.6.39)</p>
 
 <p>这个标志激活了每个容器的系统范围的监控。一个容器是一系列为了更细化控制而隔离出来的资源的抽象(CPUs, memory等等)。在这个模式下，只有当线程运行在属于被指定的容器中的CPU上(cgroup)。</p>
+
+<p><em>perf_event_attr</em>结构体为创建的事件提供了详细的配置信息。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct perf_event_attr {
+</span><span class='line'>               __u32 type;         /* Type of event */
+</span><span class='line'>               __u32 size;         /* Size of attribute structure */
+</span><span class='line'>               __u64 config;       /* Type-specific configuration */
+</span><span class='line'>
+</span><span class='line'>               union {
+</span><span class='line'>                   __u64 sample_period;    /* Period of sampling */
+</span><span class='line'>                   __u64 sample_freq;      /* Frequency of sampling */
+</span><span class='line'>               };
+</span><span class='line'>
+</span><span class='line'>               __u64 sample_type;  /* Specifies values included in sample */
+</span><span class='line'>               __u64 read_format;  /* Specifies values returned in read */
+</span><span class='line'>
+</span><span class='line'>               __u64 disabled       : 1,   /* off by default */
+</span><span class='line'>                     inherit        : 1,   /* children inherit it */
+</span><span class='line'>                     pinned         : 1,   /* must always be on PMU */
+</span><span class='line'>                     exclusive      : 1,   /* only group on PMU */
+</span><span class='line'>                     exclude_user   : 1,   /* don't count user */
+</span><span class='line'>                     exclude_kernel : 1,   /* don't count kernel */
+</span><span class='line'>                     exclude_hv     : 1,   /* don't count hypervisor */
+</span><span class='line'>                     exclude_idle   : 1,   /* don't count when idle */
+</span><span class='line'>                     mmap           : 1,   /* include mmap data */
+</span><span class='line'>                     comm           : 1,   /* include comm data */
+</span><span class='line'>                     freq           : 1,   /* use freq, not period */
+</span><span class='line'>                     inherit_stat   : 1,   /* per task counts */
+</span><span class='line'>                     enable_on_exec : 1,   /* next exec enables */
+</span><span class='line'>                     task           : 1,   /* trace fork/exit */
+</span><span class='line'>                     watermark      : 1,   /* wakeup_watermark */
+</span><span class='line'>                     precise_ip     : 2,   /* skid constraint */
+</span><span class='line'>                     mmap_data      : 1,   /* non-exec mmap data */
+</span><span class='line'>                     sample_id_all  : 1,   /* sample_type all events */
+</span><span class='line'>                     exclude_host   : 1,   /* don't count in host */
+</span><span class='line'>                     exclude_guest  : 1,   /* don't count in guest */
+</span><span class='line'>                     exclude_callchain_kernel : 1,
+</span><span class='line'>                                           /* exclude kernel callchains */
+</span><span class='line'>                     exclude_callchain_user   : 1,
+</span><span class='line'>                                           /* exclude user callchains */
+</span><span class='line'>                     mmap2          :  1,  /* include mmap with inode data */
+</span><span class='line'>                     comm_exec      :  1,  /* flag comm events that are due to exec */
+</span><span class='line'>                     __reserved_1   : 39;
+</span><span class='line'>
+</span><span class='line'>               union {
+</span><span class='line'>                   __u32 wakeup_events;    /* wakeup every n events */
+</span><span class='line'>                   __u32 wakeup_watermark; /* bytes before wakeup */
+</span><span class='line'>               };
+</span><span class='line'>
+</span><span class='line'>               __u32     bp_type;          /* breakpoint type */
+</span><span class='line'>
+</span><span class='line'>               union {
+</span><span class='line'>                   __u64 bp_addr;          /* breakpoint address */
+</span><span class='line'>                   __u64 config1;          /* extension of config */
+</span><span class='line'>               };
+</span><span class='line'>
+</span><span class='line'>               union {
+</span><span class='line'>                   __u64 bp_len;           /* breakpoint length */
+</span><span class='line'>                   __u64 config2;          /* extension of config1 */
+</span><span class='line'>               };
+</span><span class='line'>               __u64 branch_sample_type;   /* enum perf_branch_sample_type */
+</span><span class='line'>               __u64 sample_regs_user;     /* user regs to dump on samples */
+</span><span class='line'>               __u32 sample_stack_user;    /* size of stack to dump on
+</span><span class='line'>                                              samples */
+</span><span class='line'>               __u32 __reserved_2;         /* Align to u64 */
+</span><span class='line'>
+</span><span class='line'>           };</span></code></pre></td></tr></table></div></figure>
+
+
+
 </div>
 
 

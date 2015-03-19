@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Numa | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/numa/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-18T21:16:19+08:00</updated>
+  <updated>2015-03-19T09:29:18+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -78,6 +78,74 @@ int perf_event_open(struct perf_event_attr *attr,
 <p><strong>PERF_FLAG_PID_CGROUP</strong> (since Linux 2.6.39)</p>
 
 <p>这个标志激活了每个容器的系统范围的监控。一个容器是一系列为了更细化控制而隔离出来的资源的抽象(CPUs, memory等等)。在这个模式下，只有当线程运行在属于被指定的容器中的CPU上(cgroup)。</p>
+
+<p><em>perf_event_attr</em>结构体为创建的事件提供了详细的配置信息。</p>
+
+<pre><code>struct perf_event_attr {
+               __u32 type;         /* Type of event */
+               __u32 size;         /* Size of attribute structure */
+               __u64 config;       /* Type-specific configuration */
+
+               union {
+                   __u64 sample_period;    /* Period of sampling */
+                   __u64 sample_freq;      /* Frequency of sampling */
+               };
+
+               __u64 sample_type;  /* Specifies values included in sample */
+               __u64 read_format;  /* Specifies values returned in read */
+
+               __u64 disabled       : 1,   /* off by default */
+                     inherit        : 1,   /* children inherit it */
+                     pinned         : 1,   /* must always be on PMU */
+                     exclusive      : 1,   /* only group on PMU */
+                     exclude_user   : 1,   /* don't count user */
+                     exclude_kernel : 1,   /* don't count kernel */
+                     exclude_hv     : 1,   /* don't count hypervisor */
+                     exclude_idle   : 1,   /* don't count when idle */
+                     mmap           : 1,   /* include mmap data */
+                     comm           : 1,   /* include comm data */
+                     freq           : 1,   /* use freq, not period */
+                     inherit_stat   : 1,   /* per task counts */
+                     enable_on_exec : 1,   /* next exec enables */
+                     task           : 1,   /* trace fork/exit */
+                     watermark      : 1,   /* wakeup_watermark */
+                     precise_ip     : 2,   /* skid constraint */
+                     mmap_data      : 1,   /* non-exec mmap data */
+                     sample_id_all  : 1,   /* sample_type all events */
+                     exclude_host   : 1,   /* don't count in host */
+                     exclude_guest  : 1,   /* don't count in guest */
+                     exclude_callchain_kernel : 1,
+                                           /* exclude kernel callchains */
+                     exclude_callchain_user   : 1,
+                                           /* exclude user callchains */
+                     mmap2          :  1,  /* include mmap with inode data */
+                     comm_exec      :  1,  /* flag comm events that are due to exec */
+                     __reserved_1   : 39;
+
+               union {
+                   __u32 wakeup_events;    /* wakeup every n events */
+                   __u32 wakeup_watermark; /* bytes before wakeup */
+               };
+
+               __u32     bp_type;          /* breakpoint type */
+
+               union {
+                   __u64 bp_addr;          /* breakpoint address */
+                   __u64 config1;          /* extension of config */
+               };
+
+               union {
+                   __u64 bp_len;           /* breakpoint length */
+                   __u64 config2;          /* extension of config1 */
+               };
+               __u64 branch_sample_type;   /* enum perf_branch_sample_type */
+               __u64 sample_regs_user;     /* user regs to dump on samples */
+               __u32 sample_stack_user;    /* size of stack to dump on
+                                              samples */
+               __u32 __reserved_2;         /* Align to u64 */
+
+           };
+</code></pre>
 ]]></content>
   </entry>
   
