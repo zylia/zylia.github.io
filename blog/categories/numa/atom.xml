@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Numa | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/numa/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-19T16:56:39+08:00</updated>
+  <updated>2015-03-19T17:19:24+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -153,7 +153,7 @@ int perf_event_open(struct perf_event_attr *attr,
 
 <p><em>perf_event_attr</em>中的各个域描述如下：</p>
 
-<h3><em>type</em>域设置</h3>
+<p><em>type</em>域设置</p>
 
 <p><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</p>
 
@@ -169,11 +169,11 @@ int perf_event_open(struct perf_event_attr *attr,
 
 <p>　　<strong>PERF_TYPE_BREAKPOINT</strong></p>
 
-<h3><em>size</em>域设置</h3>
+<p><em>size</em>域设置</p>
 
 <p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小。</p>
 
-<h3><em>config</em>域设置</h3>
+<p><em>config</em>域设置</p>
 
 <p><em>config</em> 和<em>type</em>域一起使用，描述你想要的事件类型。当64位无法满足描述事件类型的要求，<em>config1</em>和<em>config2</em>也被拿来一起使用。这些域的编码依赖于特定的事件。</p>
 
@@ -221,7 +221,7 @@ int perf_event_open(struct perf_event_attr *attr,
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_RAW</strong>，那么需要一个定制的“raw” config值。大多数CPU支持的事件不包含在普通事件中。它们是由实现定义的；参照你的CPU手册(例如Intel Volume 3B文档)。libpfm4库能够用来转换体系结构手册里的名字到perf_event_open()在这个域中想要的十六进制值。</p>
 
-<h3><em>sample_type</em>域设置</h3>
+<p><em>sample_type</em>域设置</p>
 
 <p>用来描述sample中包含哪些值。</p>
 
@@ -270,6 +270,48 @@ int perf_event_open(struct perf_event_attr *attr,
 </code></pre>
 
 <p>剩下的2<sup>n</sup>环形缓存页具有如下所示的布局。</p>
+
+<p>mmap的值以一个header开始：</p>
+
+<pre><code>struct perf_event_header {
+               __u32   type;
+               __u16   misc;
+               __u16   size;
+           };
+</code></pre>
+
+<p>如果<em>type</em>的值是<strong>PERF_RECORD_SAMPLE</strong>，那么记录的信息如下面的格式:</p>
+
+<pre><code>struct {
+                          struct perf_event_header header;
+                          u64   sample_id;  /* if PERF_SAMPLE_IDENTIFIER */
+                          u64   ip;         /* if PERF_SAMPLE_IP */
+                          u32   pid, tid;   /* if PERF_SAMPLE_TID */
+                          u64   time;       /* if PERF_SAMPLE_TIME */
+                          u64   addr;       /* if PERF_SAMPLE_ADDR */
+                          u64   id;         /* if PERF_SAMPLE_ID */
+                          u64   stream_id;  /* if PERF_SAMPLE_STREAM_ID */
+                          u32   cpu, res;   /* if PERF_SAMPLE_CPU */
+                          u64   period;     /* if PERF_SAMPLE_PERIOD */
+                          struct read_format v; /* if PERF_SAMPLE_READ */
+                          u64   nr;         /* if PERF_SAMPLE_CALLCHAIN */
+                          u64   ips[nr];    /* if PERF_SAMPLE_CALLCHAIN */
+                          u32   size;       /* if PERF_SAMPLE_RAW */
+                          char  data[size]; /* if PERF_SAMPLE_RAW */
+                          u64   bnr;        /* if PERF_SAMPLE_BRANCH_STACK */
+                          struct perf_branch_entry lbr[bnr];
+                                            /* if PERF_SAMPLE_BRANCH_STACK */
+                          u64   abi;        /* if PERF_SAMPLE_REGS_USER */
+                          u64   regs[weight(mask)];
+                                            /* if PERF_SAMPLE_REGS_USER */
+                          u64   size;       /* if PERF_SAMPLE_STACK_USER */
+                          char  data[size]; /* if PERF_SAMPLE_STACK_USER */
+                          u64   dyn_size;   /* if PERF_SAMPLE_STACK_USER */
+                          u64   weight;     /* if PERF_SAMPLE_WEIGHT */
+                          u64   data_src;   /* if PERF_SAMPLE_DATA_SRC */
+                          u64   transaction;/* if PERF_SAMPLE_TRANSACTION */
+                      };
+</code></pre>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-19T16:56:39+08:00</updated>
+  <updated>2015-03-19T17:19:24+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -223,7 +223,7 @@
 
 <p><em>perf_event_attr</em>中的各个域描述如下：</p>
 
-<h3><em>type</em>域设置</h3>
+<p><em>type</em>域设置</p>
 
 <p><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</p>
 
@@ -239,11 +239,11 @@
 
 <p>　　<strong>PERF_TYPE_BREAKPOINT</strong></p>
 
-<h3><em>size</em>域设置</h3>
+<p><em>size</em>域设置</p>
 
 <p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小。</p>
 
-<h3><em>config</em>域设置</h3>
+<p><em>config</em>域设置</p>
 
 <p><em>config</em> 和<em>type</em>域一起使用，描述你想要的事件类型。当64位无法满足描述事件类型的要求，<em>config1</em>和<em>config2</em>也被拿来一起使用。这些域的编码依赖于特定的事件。</p>
 
@@ -291,7 +291,7 @@
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_RAW</strong>，那么需要一个定制的“raw” config值。大多数CPU支持的事件不包含在普通事件中。它们是由实现定义的；参照你的CPU手册(例如Intel Volume 3B文档)。libpfm4库能够用来转换体系结构手册里的名字到perf_event_open()在这个域中想要的十六进制值。</p>
 
-<h3><em>sample_type</em>域设置</h3>
+<p><em>sample_type</em>域设置</p>
 
 <p>用来描述sample中包含哪些值。</p>
 
@@ -366,6 +366,84 @@
 
 
 <p>剩下的2<sup>n</sup>环形缓存页具有如下所示的布局。</p>
+
+<p>mmap的值以一个header开始：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct perf_event_header {
+</span><span class='line'>               __u32   type;
+</span><span class='line'>               __u16   misc;
+</span><span class='line'>               __u16   size;
+</span><span class='line'>           };</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果<em>type</em>的值是<strong>PERF_RECORD_SAMPLE</strong>，那么记录的信息如下面的格式:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct {
+</span><span class='line'>                          struct perf_event_header header;
+</span><span class='line'>                          u64   sample_id;  /* if PERF_SAMPLE_IDENTIFIER */
+</span><span class='line'>                          u64   ip;         /* if PERF_SAMPLE_IP */
+</span><span class='line'>                          u32   pid, tid;   /* if PERF_SAMPLE_TID */
+</span><span class='line'>                          u64   time;       /* if PERF_SAMPLE_TIME */
+</span><span class='line'>                          u64   addr;       /* if PERF_SAMPLE_ADDR */
+</span><span class='line'>                          u64   id;         /* if PERF_SAMPLE_ID */
+</span><span class='line'>                          u64   stream_id;  /* if PERF_SAMPLE_STREAM_ID */
+</span><span class='line'>                          u32   cpu, res;   /* if PERF_SAMPLE_CPU */
+</span><span class='line'>                          u64   period;     /* if PERF_SAMPLE_PERIOD */
+</span><span class='line'>                          struct read_format v; /* if PERF_SAMPLE_READ */
+</span><span class='line'>                          u64   nr;         /* if PERF_SAMPLE_CALLCHAIN */
+</span><span class='line'>                          u64   ips[nr];    /* if PERF_SAMPLE_CALLCHAIN */
+</span><span class='line'>                          u32   size;       /* if PERF_SAMPLE_RAW */
+</span><span class='line'>                          char  data[size]; /* if PERF_SAMPLE_RAW */
+</span><span class='line'>                          u64   bnr;        /* if PERF_SAMPLE_BRANCH_STACK */
+</span><span class='line'>                          struct perf_branch_entry lbr[bnr];
+</span><span class='line'>                                            /* if PERF_SAMPLE_BRANCH_STACK */
+</span><span class='line'>                          u64   abi;        /* if PERF_SAMPLE_REGS_USER */
+</span><span class='line'>                          u64   regs[weight(mask)];
+</span><span class='line'>                                            /* if PERF_SAMPLE_REGS_USER */
+</span><span class='line'>                          u64   size;       /* if PERF_SAMPLE_STACK_USER */
+</span><span class='line'>                          char  data[size]; /* if PERF_SAMPLE_STACK_USER */
+</span><span class='line'>                          u64   dyn_size;   /* if PERF_SAMPLE_STACK_USER */
+</span><span class='line'>                          u64   weight;     /* if PERF_SAMPLE_WEIGHT */
+</span><span class='line'>                          u64   data_src;   /* if PERF_SAMPLE_DATA_SRC */
+</span><span class='line'>                          u64   transaction;/* if PERF_SAMPLE_TRANSACTION */
+</span><span class='line'>                      };</span></code></pre></td></tr></table></div></figure>
+
+
+
 ]]></content>
   </entry>
   
