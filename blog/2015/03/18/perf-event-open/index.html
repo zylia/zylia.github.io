@@ -287,13 +287,14 @@
 </span><span class='line'>           };</span></code></pre></td></tr></table></div></figure>
 
 
-<p><em>perf_event_attr</em>中的各个域描述如下：</p>
+<p><em>perf_event_attr</em>中的各个域描比较复杂，我们分别叙述如下：</p>
 
-<p><em>type</em>域设置</p>
+<p>1)<em>type</em>域设置</p>
 
 <p><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</p>
 
-<p>　　<strong>PERF_TYPE_HARDWARE</strong></p>
+<p><font size=2>
+　　<strong>PERF_TYPE_HARDWARE</strong></p>
 
 <p>　　<strong>PERF_TYPE_SOFTWARE</strong></p>
 
@@ -303,13 +304,13 @@
 
 <p>　　<strong>PERF_TYPE_RAW</strong></p>
 
-<p>　　<strong>PERF_TYPE_BREAKPOINT</strong></p>
+<p>　　<strong>PERF_TYPE_BREAKPOINT</strong></font></p>
 
-<p><em>size</em>域设置</p>
+<p>2)<em>size</em>域设置</p>
 
 <p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小。</p>
 
-<p><em>config</em>域设置</p>
+<p>3)<em>config</em>域设置</p>
 
 <p><em>config</em> 和<em>type</em>域一起使用，描述你想要的事件类型。当64位无法满足描述事件类型的要求，<em>config1</em>和<em>config2</em>也被拿来一起使用。这些域的编码依赖于特定的事件。</p>
 
@@ -317,7 +318,8 @@
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_HARDWARE</strong>，我们在测量普通的CPU硬件事件。并不是这些事件都适合所有的平台。设置<em>config</em>为下面值的其中之一：</p>
 
-<p>　　<strong>PERF_COUNT_HW_CPU_CYCLES</strong></p>
+<p><font size=2>
+　　<strong>PERF_COUNT_HW_CPU_CYCLES</strong></p>
 
 <p>　　<strong>PERF_COUNT_HW_INSTRUCTIONS</strong></p>
 
@@ -335,11 +337,12 @@
 
 <p>　　<strong>PERF_COUNT_HW_STALLED_CYCLES_BACKEND</strong>：指令执行完后的延迟。</p>
 
-<p>　　<strong>PERF_COUNT_HW_REF_CPU_CYCLES</strong></p>
+<p>　　<strong>PERF_COUNT_HW_REF_CPU_CYCLES</strong></font></p>
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_SOFTWARE</strong>，我们在测量内核提供的软件事件。设置<em>config</em>为以下几种类型之一：</p>
 
-<p>　　<strong>PERF_COUNT_SW_CPU_CLOCK</strong></p>
+<p><font size=2>
+　　<strong>PERF_COUNT_SW_CPU_CLOCK</strong></p>
 
 <p>　　<strong>PERF_COUNT_SW_TASK_CLOCK</strong></p>
 
@@ -351,13 +354,13 @@
 
 <p>　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MIN</strong></p>
 
-<p>　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MAJ</strong></p>
+<p>　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MAJ</strong></font></p>
 
 <p>　　等等。</p>
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_RAW</strong>，那么需要一个定制的“raw” config值。大多数CPU支持的事件不包含在普通事件中。它们是由实现定义的；参照你的CPU手册(例如Intel Volume 3B文档)。libpfm4库能够用来转换体系结构手册里的名字到perf_event_open()在这个域中想要的十六进制值。</p>
 
-<p><em>sample_type</em>域设置</p>
+<p>4)<em>sample_type</em>域设置</p>
 
 <p>用来描述sample中包含哪些值。</p>
 
