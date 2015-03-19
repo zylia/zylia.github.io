@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-19T11:54:25+08:00</updated>
+  <updated>2015-03-19T15:46:55+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -223,6 +223,8 @@
 
 <p><em>perf_event_attr</em>中的各个域描述如下：</p>
 
+<h3><em>type</em>域设置</h3>
+
 <p><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</p>
 
 <p>　　<strong>PERF_TYPE_HARDWARE</strong></p>
@@ -237,7 +239,11 @@
 
 <p>　　<strong>PERF_TYPE_BREAKPOINT</strong></p>
 
-<p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小</p>
+<h3><em>size</em>域设置</h3>
+
+<p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小。</p>
+
+<h3><em>config</em>域设置</h3>
 
 <p><em>config</em> 和<em>type</em>域一起使用，描述你想要的事件类型。当64位无法满足描述事件类型的要求，<em>config1</em>和<em>config2</em>也被拿来一起使用。这些域的编码依赖于特定的事件。</p>
 
@@ -281,9 +287,13 @@
 
 <p>　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MAJ</strong></p>
 
-<p>等等。</p>
+<p>　　等等。</p>
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_RAW</strong>，那么需要一个定制的“raw” config值。大多数CPU支持的事件不包含在普通事件中。它们是由实现定义的；参照你的CPU手册(例如Intel Volume 3B文档)。libpfm4库能够用来转换体系结构手册里的名字到perf_event_open()在这个域中想要的十六进制值。</p>
+
+<h3><em>sample_type</em>域设置</h3>
+
+<p>用来描述sample中包含哪些值。</p>
 ]]></content>
   </entry>
   
