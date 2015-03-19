@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-19T09:57:05+08:00</updated>
+  <updated>2015-03-19T11:40:19+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -219,10 +219,7 @@
 
 <p><em>perf_event_attr</em>中的各个域描述如下：</p>
 
-<blockquote><ul>
-<li><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</li>
-</ul>
-</blockquote>
+<p><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</p>
 
 <p><strong>PERF_TYPE_HARDWARE</strong></p>
 
@@ -236,11 +233,51 @@
 
 <p><strong>PERF_TYPE_BREAKPOINT</strong></p>
 
-<blockquote><ul>
-<li><p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小</p></li>
-<li><p><em>config</em> 和<em>type</em>域一起使用，描述你想要的事件类型。当64位无法满足描述事件类型的要求，<em>config1</em>和<em>config2</em>也被拿来一起使用。这些域的编码依赖于特定的事件。</p></li>
-</ul>
-</blockquote>
+<p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小</p>
+
+<p><em>config</em> 和<em>type</em>域一起使用，描述你想要的事件类型。当64位无法满足描述事件类型的要求，<em>config1</em>和<em>config2</em>也被拿来一起使用。这些域的编码依赖于特定的事件。</p>
+
+<p>有很多方式设置<em>config</em>域的值，该值依赖于前面描述的<em>type</em>域。随着<em>type</em>域的不同，设置<em>config</em>域的方法也不尽相同。</p>
+
+<p>如果<em>type</em>是<strong>PERF_TYPE_HARDWARE</strong>，我们在测量普通的CPU硬件事件。并不是这些事件都适合所有的平台。设置<em>config</em>为下面值的其中之一：</p>
+
+<p><strong>PERF_COUNT_HW_CPU_CYCLES</strong></p>
+
+<p><strong>PERF_COUNT_HW_INSTRUCTIONS</strong></p>
+
+<p><strong>PERF_COUNT_HW_CACHE_REFERENCES</strong></p>
+
+<p><strong>PERF_COUNT_HW_CACHE_MISSES</strong></p>
+
+<p><strong>PERF_COUNT_HW_BRANCH_INSTRUCTIONS</strong></p>
+
+<p><strong>PERF_COUNT_HW_BRANCH_MISSES</strong></p>
+
+<p><strong>PERF_COUNT_HW_BUS_CYCLES</strong></p>
+
+<p><strong>PERF_COUNT_HW_STALLED_CYCLES_FRONTEND</strong>：在发送指令时的延迟。</p>
+
+<p><strong>PERF_COUNT_HW_STALLED_CYCLES_BACKEND</strong>：指令执行完后的延迟。</p>
+
+<p><strong>PERF_COUNT_HW_REF_CPU_CYCLES</strong></p>
+
+<p>如果<em>type</em>是<strong>PERF_TYPE_SOFTWARE</strong>，我们在测量内核提供的软件事件。设置<em>config</em>为以下几种类型之一：</p>
+
+<p><strong>PERF_COUNT_SW_CPU_CLOCK</strong></p>
+
+<p><strong>PERF_COUNT_SW_TASK_CLOCK</strong></p>
+
+<p><strong>PERF_COUNT_SW_PAGE_FAULTS</strong></p>
+
+<p><strong>PERF_COUNT_SW_CONTEXT_SWITCHES</strong></p>
+
+<p><strong>PERF_COUNT_SW_CPU_MIGRATIONS</strong></p>
+
+<p><strong>PERF_COUNT_SW_PAGE_FAULTS_MIN</strong></p>
+
+<p><strong>PERF_COUNT_SW_PAGE_FAULTS_MAJ</strong></p>
+
+<p>等等。</p>
 ]]></content>
   </entry>
   
