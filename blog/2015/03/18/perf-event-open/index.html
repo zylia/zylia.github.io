@@ -111,7 +111,7 @@
 </span><span class='line'>                    unsigned long flags);</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>参数</h2>
+<h2>pid和cpu参数</h2>
 
 <p><em>pid</em>和<em>cpu</em>参数用来描述监控哪个进程和CPU:</p>
 
@@ -133,6 +133,8 @@
 <p><strong>pid = -1 和 cpu = -1</strong>  <br />
 这个设置是无效的并会返回错误。<em>group_fd</em>参数允许建立事件组。一个事件组有一个事件被称为组长。首先建立组长，他的<em>group_id</em> = -1。接下来剩下的组员会用组长的文件描述符作为<em>group_fd</em>并用<strong>perf_event_open()</strong>建立。(单一事件将会以<em>group_fd</em> = -1来设定，并且认为该组只有一个成员)。一个事件组做为一个整体调度到CPU上：只有所有组内的事件都能被放在同一CPU上它才会放置在CPU上。这以为着组员事件的数值互相比较是有意义的&mdash;相加，相除，等等&mdash;因为他们是执行相同指令时的事件统计值。</p>
 
+<h2>flag参数</h2>
+
 <p><em>flags</em>参数由ORing和以下数值的0个或者多个组成：</p>
 
 <p><strong>PERF_FLAG_FD_CLOEXEC</strong> (since Linux 3.14)</p>
@@ -150,6 +152,8 @@
 <p><strong>PERF_FLAG_PID_CGROUP</strong> (since Linux 2.6.39)</p>
 
 <p>这个标志激活了每个容器的系统范围的监控。一个容器是一系列为了更细化控制而隔离出来的资源的抽象(CPUs, memory等等)。在这个模式下，只有当线程运行在属于被指定的容器中的CPU上(cgroup)。</p>
+
+<h2>perf_event_attr参数</h2>
 
 <p><em>perf_event_attr</em>结构体为创建的事件提供了详细的配置信息。</p>
 
@@ -287,17 +291,17 @@
 
 <p><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</p>
 
-<p><strong>PERF_TYPE_HARDWARE</strong></p>
+<p>　　<strong>PERF_TYPE_HARDWARE</strong></p>
 
-<p><strong>PERF_TYPE_SOFTWARE</strong></p>
+<p>　　<strong>PERF_TYPE_SOFTWARE</strong></p>
 
-<p><strong>PERF_TYPE_TRACEPOINT</strong></p>
+<p>　　<strong>PERF_TYPE_TRACEPOINT</strong></p>
 
-<p><strong>PERF_TYPE_HW_CACHE</strong></p>
+<p>　　<strong>PERF_TYPE_HW_CACHE</strong></p>
 
-<p><strong>PERF_TYPE_RAW</strong></p>
+<p>　　<strong>PERF_TYPE_RAW</strong></p>
 
-<p><strong>PERF_TYPE_BREAKPOINT</strong></p>
+<p>　　<strong>PERF_TYPE_BREAKPOINT</strong></p>
 
 <p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小</p>
 
@@ -307,43 +311,45 @@
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_HARDWARE</strong>，我们在测量普通的CPU硬件事件。并不是这些事件都适合所有的平台。设置<em>config</em>为下面值的其中之一：</p>
 
-<p><strong>PERF_COUNT_HW_CPU_CYCLES</strong></p>
+<p>　　<strong>PERF_COUNT_HW_CPU_CYCLES</strong></p>
 
-<p><strong>PERF_COUNT_HW_INSTRUCTIONS</strong></p>
+<p>　　<strong>PERF_COUNT_HW_INSTRUCTIONS</strong></p>
 
-<p><strong>PERF_COUNT_HW_CACHE_REFERENCES</strong></p>
+<p>　　<strong>PERF_COUNT_HW_CACHE_REFERENCES</strong></p>
 
-<p><strong>PERF_COUNT_HW_CACHE_MISSES</strong></p>
+<p>　　<strong>PERF_COUNT_HW_CACHE_MISSES</strong></p>
 
-<p><strong>PERF_COUNT_HW_BRANCH_INSTRUCTIONS</strong></p>
+<p>　　<strong>PERF_COUNT_HW_BRANCH_INSTRUCTIONS</strong></p>
 
-<p><strong>PERF_COUNT_HW_BRANCH_MISSES</strong></p>
+<p>　　<strong>PERF_COUNT_HW_BRANCH_MISSES</strong></p>
 
-<p><strong>PERF_COUNT_HW_BUS_CYCLES</strong></p>
+<p>　　<strong>PERF_COUNT_HW_BUS_CYCLES</strong></p>
 
-<p><strong>PERF_COUNT_HW_STALLED_CYCLES_FRONTEND</strong>：在发送指令时的延迟。</p>
+<p>　　<strong>PERF_COUNT_HW_STALLED_CYCLES_FRONTEND</strong>：在发送指令时的延迟。</p>
 
-<p><strong>PERF_COUNT_HW_STALLED_CYCLES_BACKEND</strong>：指令执行完后的延迟。</p>
+<p>　　<strong>PERF_COUNT_HW_STALLED_CYCLES_BACKEND</strong>：指令执行完后的延迟。</p>
 
-<p><strong>PERF_COUNT_HW_REF_CPU_CYCLES</strong></p>
+<p>　　<strong>PERF_COUNT_HW_REF_CPU_CYCLES</strong></p>
 
 <p>如果<em>type</em>是<strong>PERF_TYPE_SOFTWARE</strong>，我们在测量内核提供的软件事件。设置<em>config</em>为以下几种类型之一：</p>
 
-<p><strong>PERF_COUNT_SW_CPU_CLOCK</strong></p>
+<p>　　<strong>PERF_COUNT_SW_CPU_CLOCK</strong></p>
 
-<p><strong>PERF_COUNT_SW_TASK_CLOCK</strong></p>
+<p>　　<strong>PERF_COUNT_SW_TASK_CLOCK</strong></p>
 
-<p><strong>PERF_COUNT_SW_PAGE_FAULTS</strong></p>
+<p>　　<strong>PERF_COUNT_SW_PAGE_FAULTS</strong></p>
 
-<p><strong>PERF_COUNT_SW_CONTEXT_SWITCHES</strong></p>
+<p>　　<strong>PERF_COUNT_SW_CONTEXT_SWITCHES</strong></p>
 
-<p><strong>PERF_COUNT_SW_CPU_MIGRATIONS</strong></p>
+<p>　　<strong>PERF_COUNT_SW_CPU_MIGRATIONS</strong></p>
 
-<p><strong>PERF_COUNT_SW_PAGE_FAULTS_MIN</strong></p>
+<p>　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MIN</strong></p>
 
-<p><strong>PERF_COUNT_SW_PAGE_FAULTS_MAJ</strong></p>
+<p>　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MAJ</strong></p>
 
 <p>等等。</p>
+
+<p>如果<em>type</em>是<strong>PERF_TYPE_RAW</strong>，那么需要一个定制的“raw” config值。大多数CPU支持的事件不包含在普通事件中。它们是由实现定义的；参照你的CPU手册(例如Intel Volume 3B文档)。libpfm4库能够用来转换体系结构手册里的名字到perf_event_open()在这个域中想要的十六进制值。</p>
 </div>
 
 
