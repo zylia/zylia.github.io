@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-19T09:51:32+08:00</updated>
+  <updated>2015-03-19T09:57:05+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -219,23 +219,28 @@
 
 <p><em>perf_event_attr</em>中的各个域描述如下：</p>
 
-<p><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</p>
+<blockquote><ul>
+<li><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</li>
+</ul>
+</blockquote>
 
-<p>&amp;nbsp -PERF_TYPE_HARDWARE**</p>
+<p><strong>PERF_TYPE_HARDWARE</strong></p>
 
-<p>&amp;nbsp -<strong>PERF_TYPE_SOFTWARE</strong></p>
+<p><strong>PERF_TYPE_SOFTWARE</strong></p>
 
-<p>&amp;nbsp -<strong>PERF_TYPE_TRACEPOINT</strong></p>
+<p><strong>PERF_TYPE_TRACEPOINT</strong></p>
 
-<p>&amp;nbsp -<strong>PERF_TYPE_HW_CACHE</strong></p>
+<p><strong>PERF_TYPE_HW_CACHE</strong></p>
 
-<p>&amp;nbsp -<strong>PERF_TYPE_RAW</strong></p>
+<p><strong>PERF_TYPE_RAW</strong></p>
 
-<p>&amp;nbsp -<strong>PERF_TYPE_BREAKPOINT</strong></p>
+<p><strong>PERF_TYPE_BREAKPOINT</strong></p>
 
-<p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小</p>
-
-<p><em>config</em> 和<em>type</em>域一起使用，描述你想要的事件类型。当64位无法满足描述事件类型的要求，<em>config1</em>和<em>config2</em>也被拿来一起使用。这些域的编码依赖于特定的事件。</p>
+<blockquote><ul>
+<li><p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小</p></li>
+<li><p><em>config</em> 和<em>type</em>域一起使用，描述你想要的事件类型。当64位无法满足描述事件类型的要求，<em>config1</em>和<em>config2</em>也被拿来一起使用。这些域的编码依赖于特定的事件。</p></li>
+</ul>
+</blockquote>
 ]]></content>
   </entry>
   
