@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Numa | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/numa/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-20T17:53:29+08:00</updated>
+  <updated>2015-03-20T17:55:34+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -20,10 +20,7 @@
     <id>http://zylia.github.io/blog/2015/03/20/perf-event-open-lab</id>
     <content type="html"><![CDATA[<p>该篇blog讲如何用perf_event_open()系统调用收集多线程程序的性能数据。</p>
 
-<p>首先，我们需要检测该多线程程序开始运行后分配的进程号，以便后来能够跟踪。我们会用vfork()创建一个子进程，子进程和父进程共享同样的代码逻辑，并且都是从vfork()语句之后执行。子进程会先执行，父进程会先被阻塞。如果子进程调用exit()或者exec()，那么父进程会解除阻塞状态，恢复执行。然后在子进程中调用execvp()运行多线程程序，一旦子进程调用execvp()，子进程就会返回，父进程会继续运行，这样我们就能获得多线程程序在运行时分配的进程号。vfork()系统调用会分别在父进程和子进程中返回。父进程会返回子进程的进程号，而在子进程中会返回0。</p>
-
-<!-- more -->
-
+<p>首先，我们需要检测该多线程程序开始运行后分配的进程号，以便后来能够跟踪。我们会用vfork()创建一个子进程，子进程和父进程共享同样的代码逻辑，并且都是从vfork()语句之后执行。子进程会先执行，父进程会先被阻塞。如果子进程调用exit()或者exec()，那么父进程会解除阻塞状态，恢复执行。<!-- more -->然后在子进程中调用execvp()运行多线程程序，一旦子进程调用execvp()，子进程就会返回，父进程会继续运行，这样我们就能获得多线程程序在运行时分配的进程号。vfork()系统调用会分别在父进程和子进程中返回。父进程会返回子进程的进程号，而在子进程中会返回0。</p>
 
 <pre><code>sprintf(line,"/parsec-2.1/pkgs/apps/blackscholes/inst/amd64-linux.gcc-openmp/bin/blackscholes 8 /parsec-2.1/pkgs/apps/blackscholes/inputs/in_64K.txt output.txt");
 char *cmd[] = {"sh", "-c", line, NULL};
