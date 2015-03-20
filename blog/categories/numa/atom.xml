@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Numa | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/numa/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-20T10:38:46+08:00</updated>
+  <updated>2015-03-20T11:09:49+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Perf_event_open Lab]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/20/perf-event-open-lab/"/>
+    <updated>2015-03-20T11:07:56+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/20/perf-event-open-lab</id>
+    <content type="html"><![CDATA[<p>该篇blog讲如何用perf_event_open()系统调用收集多线程程序的性能数据。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[系统调用perf_event_open的使用说明]]></title>
@@ -310,7 +319,9 @@ int perf_event_open(struct perf_event_attr *attr,
 <!-- more -->
 
 
-<p>应用程序级别的优化技术有以下一些缺点；对于程序员来说很难决定一个给定的程序/工作集可以用哪些优化策略。我们需要知道线程和内存对象之间的交互信息，例如，在程序运行的任何时刻点知道哪些线程访问哪些内存对象，以及每次内存访问请求的发送和接受节点的详细信息。然而，现有的分析工具，例如OProfile，Linux Perf，VTune和Memphis都无法提供这些信息。这些工具有些能够提供全局静态内存对象的信息，但是这些对象只占据了所有远端内存访问的很小一部分比例。作者做实验发现这些全局静态内存对象只占用了少于4%的总远端访问次数。对于其他内存对象，现有的分析工具只提供了目标内存地址和触发该访问的程序指令。</p>
+<p>作者在文章中指出，应用程序级别的优化技术有以下一些缺点；对于程序员来说很难决定一个给定的程序/工作集可以用哪些优化策略。我们需要知道线程和内存对象之间的交互信息，例如，在程序运行的任何时刻点知道哪些线程访问哪些内存对象，以及每次内存访问请求的发送和接受节点的详细信息。然而，现有的分析工具，例如OProfile，Linux Perf，VTune和Memphis都无法提供这些信息。这些工具有些能够提供全局静态内存对象的信息，但是这些对象只占据了所有远端内存访问的很小一部分比例。作者做实验发现这些全局静态内存对象只占用了少于4%的总远端访问次数。对于其他内存对象，现有的分析工具只提供了有限的信息，例如指令访问的目标内存地址和触发该访问的程序指令。</p>
+
+<p>MemProf建立了线程和它访问的内存对象之间的关联。</p>
 ]]></content>
   </entry>
   
