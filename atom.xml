@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-20T11:09:49+08:00</updated>
+  <updated>2015-03-20T11:58:57+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -14,11 +14,49 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Perf_event_open Lab]]></title>
+    <title type="html"><![CDATA[收集多线程程序的性能数据]]></title>
     <link href="http://zylia.github.io/blog/2015/03/20/perf-event-open-lab/"/>
     <updated>2015-03-20T11:07:56+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/20/perf-event-open-lab</id>
     <content type="html"><![CDATA[<p>该篇blog讲如何用perf_event_open()系统调用收集多线程程序的性能数据。</p>
+
+<p>首先，我们需要检测该多线程程序开始运行后分配的进程号，以便后来能够跟踪。我们会用vfork()创建一个子进程，子进程和父进程共享同样的代码逻辑，并且都是从vfork()语句之后执行。然后在子进程中运行多线程程序，这样我们就能获得多线程程序在运行时分配的进程号。vfork()系统调用会分别在父进程和子进程中返回。父进程会返回子进程的进程号，而在子进程中会返回0。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sprintf(line,"/parsec-2.1/pkgs/apps/blackscholes/inst/amd64-linux.gcc-openmp/bin/blackscholes 8 /home/liao/parsec-2.1/pkgs/apps/blackscholes/inputs/in_64K.txt output.txt");
+</span><span class='line'>char *cmd[] = {"sh", "-c", line, NULL};
+</span><span class='line'>
+</span><span class='line'>iResult = vfork();
+</span><span class='line'>if (iResult &lt; 0)
+</span><span class='line'>{
+</span><span class='line'>     int err_code = errno;
+</span><span class='line'>   printf ("*** ERROR: fork failed for %s\n", strerror(err_code));
+</span><span class='line'>}
+</span><span class='line'>else if (iResult)  // 对于child process该值为0
+</span><span class='line'>{
+</span><span class='line'>   return iResult;
+</span><span class='line'>}
+</span><span class='line'>if (execvp("sh", cmd) &lt; 0){
+</span><span class='line'>     int err_code = errno;
+</span><span class='line'>     printf ("*** ERROR: exec failed for %s\n",strerror(err_code));
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
