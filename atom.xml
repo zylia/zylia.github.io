@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-20T17:01:36+08:00</updated>
+  <updated>2015-03-20T17:53:29+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -93,6 +93,20 @@
 </span><span class='line'>     printf ("*** ERROR: exec failed for %s\n",strerror(err_code));
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
+
+<p>在获得了多线程程序的进程号之后，我们需要知道该程序派生的线程数目以及它们的线程号。程序派生的线程号可以在&#8221;/proc/pid/task/&ldquo;目录中查看，我们通过统计该目录下的文件的个数并把文件名转换为线程号。</p>
+
+<p>在获得了程序所有的线程号后，我们给每一个线程用perf_event_open()建立一个记录性能数据的文件。首先，需要初始化一个perf_event_attr结构体，其中config1参数代表记录的延迟阈值。perf_event_open()新建了一个文件，并返回了该文件的文件描述符。当perf_event_open()工作在采样模式时，我们需要将该文件映射到内存才能进行读写操作。采用下面的语句将文件映射到length大小的缓存中，</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>metadata_page[index]= mmap(NULL, length, PROT_READ, MAP_SHARED, curfd, 0);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在该调用中，我们把perf_event_open()返回的文件描述符curfd作为参数传递给mmap()调用。然后，性能数据就会记录到metadata_page当中。</p>
+
+<p>接着调用PERF_EVENT_IOC_RESET和PERF_EVENT_IOC_ENABLE，性能监控事件开始运行。</p>
+
+<p>当多线程程序运行结束后，调用PERF_EVENT_IOC_DISABLE，停止记录性能监控数据。过滤掉metadata_page的头文件后，剩下的就是记录的性能采样数据。</p>
 ]]></content>
   </entry>
   
