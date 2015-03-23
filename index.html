@@ -9,11 +9,11 @@
   <meta name="author" content="zylia">
 
   
-  <meta name="description" content="/proc//maps查看进程的虚拟地址空间是如何使用的，包括进程的代码段、栈区、堆区、动态库、内核区对应的虚拟地址，示例如下： 1
+  <meta name="description" content="/proc/\&lt;PID>/maps查看进程的虚拟地址空间是如何使用的，包括进程的代码段、栈区、堆区、动态库、内核区对应的虚拟地址，示例如下： 1
 2
 3
 4
-34ae400000-34ae420000 r-xp 00000000 08:02 3932188 /lib64/ld-2.12.so &hellip;">
+34ae400000-34ae420000 r-xp 00000000 08:02 3932188 /lib64/ld-2.12.so &hellip;&#8221;>
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,7 +91,7 @@
   </header>
 
 
-  <div class="entry-content"><p>/proc/<PID>/maps查看进程的虚拟地址空间是如何使用的，包括进程的代码段、栈区、堆区、动态库、内核区对应的虚拟地址，示例如下：</p>
+  <div class="entry-content"><p>/proc/\&lt;PID>/maps查看进程的虚拟地址空间是如何使用的，包括进程的代码段、栈区、堆区、动态库、内核区对应的虚拟地址，示例如下：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -104,7 +104,7 @@
 
 
 <p>该文件有6列，分别为：
-<font size=2></p>
+<font size=3></p>
 
 <blockquote><ul>
 <li>地址：库在进程里地址范围</li>
@@ -112,7 +112,8 @@
 <li>偏移量：库在进程里地址范围</li>
 <li>设备：映象文件的主设备号和次设备号</li>
 <li>节点：映像文件的节点号；</li>
-<li>路径：映像文件的路径。</font></li>
+<li>路径：映像文件的路径。
+</font></li>
 </ul>
 </blockquote>
 </div>
