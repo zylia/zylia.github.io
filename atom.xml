@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-20T17:55:34+08:00</updated>
+  <updated>2015-03-23T15:23:52+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -1004,7 +1004,7 @@ mmap_base表示memory mapping段的起始地址。<strong>那为什么mmap段没
 <!-- more -->
 
 
-<p><font size=2>
+<p><font size=3>
 1) Git: <a href="http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe">http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe</a></p>
 
 <p>2) Ruby: <a href="http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe">http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe</a></p>
