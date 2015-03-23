@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-23T16:22:07+08:00</updated>
+  <updated>2015-03-23T16:24:36+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -18,7 +18,7 @@
     <link href="http://zylia.github.io/blog/2015/03/20/linux-maps/"/>
     <updated>2015-03-20T16:48:04+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/20/linux-maps</id>
-    <content type="html"><![CDATA[<p>/proc/\&lt;PID>/maps查看进程的虚拟地址空间是如何使用的，包括进程的代码段、栈区、堆区、动态库、内核区对应的虚拟地址，示例如下：</p>
+    <content type="html"><![CDATA[<p>/proc/&lt;PID>/maps查看进程的虚拟地址空间是如何使用的，包括进程的代码段、栈区、堆区、动态库、内核区对应的虚拟地址，示例如下：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
