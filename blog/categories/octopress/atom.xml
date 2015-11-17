@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Octopress | Zylia's Blog]]></title>
+  <title><![CDATA[分类：octopress | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-11-17T16:37:17+08:00</updated>
+  <updated>2015-11-17T16:42:18+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Window 7配置octopress]]></title>
-    <link href="http://zylia.github.io/blog/2015/03/14/test/"/>
+    <link href="http://zylia.github.io/blog/20150314/test.html/"/>
     <updated>2015-03-14T14:23:07+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/03/14/test</id>
+    <id>http://zylia.github.io/blog/20150314/test</id>
     <content type="html"><![CDATA[<p>受一位同仁经常用octopress写博客的启发，我也准备搭个博客。</p>
 
 <p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>

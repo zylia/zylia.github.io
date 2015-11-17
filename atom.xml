@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-11-17T16:37:17+08:00</updated>
+  <updated>2015-11-17T16:42:18+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -15,18 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[Post Title]]></title>
-    <link href="http://zylia.github.io/blog/2015/11/17/post-title/"/>
+    <link href="http://zylia.github.io/blog/20151117/post-title.html/"/>
     <updated>2015-11-17T15:24:29+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/11/17/post-title</id>
+    <id>http://zylia.github.io/blog/20151117/post-title</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Window 7配置octopress]]></title>
-    <link href="http://zylia.github.io/blog/2015/03/14/test/"/>
+    <link href="http://zylia.github.io/blog/20150314/test.html/"/>
     <updated>2015-03-14T14:23:07+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/03/14/test</id>
+    <id>http://zylia.github.io/blog/20150314/test</id>
     <content type="html"><![CDATA[<p>受一位同仁经常用octopress写博客的启发，我也准备搭个博客。</p>
 
 <p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>
@@ -142,9 +142,9 @@
   
   <entry>
     <title type="html"><![CDATA[我的新家]]></title>
-    <link href="http://zylia.github.io/blog/2015/03/14/new-home/"/>
+    <link href="http://zylia.github.io/blog/20150314/new-home.html/"/>
     <updated>2015-03-14T14:03:41+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/03/14/new-home</id>
+    <id>http://zylia.github.io/blog/20150314/new-home</id>
     <content type="html"><![CDATA[<p>这是我的新家，欢迎大家多踩踩。</p>
 ]]></content>
   </entry>
