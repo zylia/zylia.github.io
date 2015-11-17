@@ -9,8 +9,16 @@
   <meta name="author" content="zylia">
 
   
+<<<<<<< HEAD
   <meta name="description" content="
 ">
+=======
+  <meta name="description" content="/proc/&lt;PID>/maps查看进程的虚拟地址空间是如何使用的，包括进程的代码段、栈区、堆区、动态库、内核区对应的虚拟地址，示例如下： 1
+2
+3
+4
+34ae400000-34ae420000 r-xp 00000000 08:02 3932188 /lib64/ld-2.12.so &hellip;&#8221;>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -39,7 +47,11 @@
   <header role="banner"><hgroup>
   <h1><a href="/">Zylia&#8217;s Blog</a></h1>
   
+<<<<<<< HEAD
     <h2>a home</h2>
+=======
+    <h2>笨鸟先飞，成功来自重复做简单的事情</h2>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
   
 </hgroup>
 
@@ -57,10 +69,15 @@
 </form>
   
 <ul class="main-navigation">
+<<<<<<< HEAD
   <li><a href="/">首页</a></li>
   <li><a href="/blog/archives">归档</a></li>
   <li><a href="/blog/categories">分类</a></li>
   <li><a href="/about">关于</a></li>
+=======
+  <li><a href="/">博客主页</a></li>
+  <li><a href="/blog/archives">文章列表</a></li>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
 </ul>
 
 </nav>
@@ -74,7 +91,11 @@
       
   <header>
     
+<<<<<<< HEAD
       <h1 class="entry-title"><a href="/blog/2015/11/17/post-title/">Post Title</a></h1>
+=======
+      <h1 class="entry-title"><a href="/blog/2015/03/20/linux-maps/">Linux系统的/proc/maps文件分析</a></h1>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
     
     
       <p class="meta">
@@ -83,14 +104,46 @@
 
 
 
+<<<<<<< HEAD
 <time class='entry-date' datetime='2015-11-17T15:24:29+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:24 pm</span></time>
+=======
+<time class='entry-date' datetime='2015-03-20T16:48:04+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:48 pm</span></time>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
         
       </p>
     
   </header>
 
 
+<<<<<<< HEAD
   <div class="entry-content">
+=======
+  <div class="entry-content"><p>/proc/&lt;PID>/maps查看进程的虚拟地址空间是如何使用的，包括进程的代码段、栈区、堆区、动态库、内核区对应的虚拟地址，示例如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>34ae400000-34ae420000 r-xp 00000000 08:02 3932188                        /lib64/ld-2.12.so
+</span><span class='line'>34ae98a000-34aeb8a000 ---p 0018a000 08:02 3932226                        /lib64/libc-2.12.so
+</span><span class='line'>34af217000-34af218000 r--p 00017000 08:02 3932233                        /lib64/libpthread-2.12.so
+</span><span class='line'>34af682000-34af683000 r--p 00082000 08:02 3932228                        /lib64/libm-2.12.so</span></code></pre></td></tr></table></div></figure>
+
+
+<p>该文件有6列，分别为：
+<font size=3></p>
+
+<blockquote><ul>
+<li>地址：库在进程里地址范围</li>
+<li>权限：虚拟内存的权限，r=读，w=写，x=执行，s=共享，p=私有</li>
+<li>偏移量：库在进程里地址范围</li>
+<li>设备：映象文件的主设备号和次设备号</li>
+<li>节点：映像文件的节点号；</li>
+<li>路径：映像文件的路径。
+</font></li>
+</ul>
+</blockquote>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
 </div>
   
   
@@ -103,7 +156,171 @@
       
   <header>
     
+<<<<<<< HEAD
       <h1 class="entry-title"><a href="/blog/2015/03/14/test/">Window 7配置octopress</a></h1>
+=======
+      <h1 class="entry-title"><a href="/blog/2015/03/20/perf-event-open-lab/">收集多线程程序的性能数据</a></h1>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<<<<<<< HEAD
+<time class='entry-date' datetime='2015-03-14T14:23:07+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:23 pm</span></time>
+=======
+<time class='entry-date' datetime='2015-03-20T11:07:56+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:07 am</span></time>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
+        
+      </p>
+    
+  </header>
+
+
+<<<<<<< HEAD
+  <div class="entry-content"><p>受一位同仁经常用octopress写博客的启发，我也准备搭个博客。</p>
+
+<p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>
+
+<p><font size=2>
+1) Git: <a href="http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe">http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe</a></p>
+
+<p>2) Ruby: <a href="http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe">http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe</a></p>
+
+<p>3) DevKit: <a href="http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></p>
+=======
+  <div class="entry-content"><p>该篇blog讲如何用perf_event_open()系统调用收集多线程程序的性能数据。</p>
+
+<p>首先，我们需要检测该多线程程序开始运行后分配的进程号，以便后来能够跟踪。我们会用vfork()创建一个子进程，子进程和父进程共享同样的代码逻辑，并且都是从vfork()语句之后执行。子进程会先执行，父进程会先被阻塞。如果子进程调用exit()或者exec()，那么父进程会解除阻塞状态，恢复执行。</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/03/20/perf-event-open-lab/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/18/perf-event-open/">系统调用perf_event_open的使用说明</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-18T16:19:47+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:19 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>perf_event_open是用来实现intel的性能监控的功能。perf_event_open()返回一个文件描述符，该描述符可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
+
+<p>调用perf_event_open()创建一个文件描述符，用来记录性能信息。每个被测量的事件对应一个文件描述符；它们能组合在一起同时测量多个事件。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/03/18/perf-event-open/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/18/memprof/">NUMA架构的程序性能分析工具MemProf</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-18T15:40:50+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:40 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&ldquo;MemProf: a Memory Profiler for NUMA Multicore Systems&#8221;是发表在计算机系统领域顶级会议USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分析工具，能够建立线程和内存对象之间的交互信息，帮助程序员理解为什么和哪些内存对象是远端访问。</p>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
+
+</div>
+  
+  
+    <footer>
+<<<<<<< HEAD
+      <a rel="full-article" href="/blog/2015/03/14/test/">Read on &rarr;</a>
+=======
+      <a rel="full-article" href="/blog/2015/03/18/memprof/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/17/virtual-memory/">Linux的虚拟内存管理(转载)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-17T10:32:30+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:32 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一个进程的虚拟地址空间主要由两个数据结来描述。一个是最高层次的：mm_struct，一个是较高层次的：vm_area_struct。
+最高层次的mm_struct结构描述了一个进程的整个虚拟地址空间。较高层次的结构vm_area_struct描述了虚拟地址空间的一个区间（简称虚拟区）。
+mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/03/17/virtual-memory/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/14/octopress/">Window 7配置octopress</a></h1>
     
     
       <p class="meta">
@@ -123,18 +340,12 @@
 
 <p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>
 
-<p><font size=2>
-1) Git: <a href="http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe">http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe</a></p>
-
-<p>2) Ruby: <a href="http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe">http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe</a></p>
-
-<p>3) DevKit: <a href="http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></p>
-
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2015/03/14/test/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2015/03/14/octopress/">Read on &rarr;</a>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
     </footer>
   
 
@@ -179,10 +390,21 @@
 <aside class="sidebar">
   
     <section>
+<<<<<<< HEAD
+=======
+  <h1>About Me</h1>
+  <img src="/images/me.png">
+  <p>My nick name is zylia and this is my blog. I am a Ph.D candidate of computer science, and this is my Homepage.  <br />
+  <br />
+  E-mail me at zyliawh@gmail.com if you have any questions or comments.</p>
+</section>
+<section>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
       <li class="post">
+<<<<<<< HEAD
         <a href="/blog/2015/11/17/post-title/">Post Title</a>
       </li>
     
@@ -192,6 +414,25 @@
     
       <li class="post">
         <a href="/blog/2015/03/14/new-home/">我的新家</a>
+=======
+        <a href="/blog/2015/03/20/linux-maps/">Linux系统的/proc/maps文件分析</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/20/perf-event-open-lab/">收集多线程程序的性能数据</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/18/perf-event-open/">系统调用perf_event_open的使用说明</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/18/memprof/">NUMA架构的程序性能分析工具MemProf</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/17/virtual-memory/">Linux的虚拟内存管理(转载)</a>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
       </li>
     
   </ul>
@@ -200,12 +441,37 @@
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/life/'>life (1)</a></li>
+<<<<<<< HEAD
 <li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
  
   </ul>
 </section>
 
 
+=======
+<li class='category'><a href='/blog/categories/linux/'>linux (1)</a></li>
+<li class='category'><a href='/blog/categories/memory/'>memory (1)</a></li>
+<li class='category'><a href='/blog/categories/numa/'>numa (3)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
+ 
+  </ul>
+</section><section>
+		<h1>Weibo</h1>
+		<li><iframe 
+		width="100%" 
+		height="300" 
+		class="share_self"  
+		frameborder="0" 
+		scrolling="no" 
+		src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=300&fansRow=0&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=1751522433&verifier=5abcd2f8&dpc=1"></iframe>
+		</li>
+</section><section>
+  <h1>Douban</h1>
+  <div>
+  <script type="text/javascript" src="http://www.douban.com/service/badge/123521105/?selection=latest&amp;picsize=small&amp;show=collection&amp;n=8&amp;columns=2"></script>
+  </div>
+</section>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
   
 </aside>
 
@@ -216,6 +482,17 @@
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
+<<<<<<< HEAD
+=======
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".fancybox").fancybox({
+    openEffect  : 'none',
+    closeEffect : 'none'
+  });
+});
+</script>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
 </footer>
   
 

@@ -4,7 +4,11 @@
   <title><![CDATA[Category: Octopress | Zylia's Blog]]></title>
   <link href="http://zylia.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
+<<<<<<< HEAD
   <updated>2015-11-17T16:03:45+08:00</updated>
+=======
+  <updated>2015-03-27T09:19:23+08:00</updated>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -15,23 +19,39 @@
   
   <entry>
     <title type="html"><![CDATA[Window 7配置octopress]]></title>
+<<<<<<< HEAD
     <link href="http://zylia.github.io/blog/2015/03/14/test/"/>
     <updated>2015-03-14T14:23:07+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/14/test</id>
+=======
+    <link href="http://zylia.github.io/blog/2015/03/14/octopress/"/>
+    <updated>2015-03-14T14:23:07+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/14/octopress</id>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
     <content type="html"><![CDATA[<p>受一位同仁经常用octopress写博客的启发，我也准备搭个博客。</p>
 
 <p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>
 
+<<<<<<< HEAD
 <p><font size=2>
+=======
+<!-- more -->
+
+
+<p><font size=3>
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
 1) Git: <a href="http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe">http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe</a></p>
 
 <p>2) Ruby: <a href="http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe">http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe</a></p>
 
 <p>3) DevKit: <a href="http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></p>
 
+<<<<<<< HEAD
 <!-- more -->
 
 
+=======
+>>>>>>> 9c5c3fb581c41a0fff895ce5ec54e7ce2d3b9806
 <p>4) Python: <a href="http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi">http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi</a></p>
 
 <p>5) easy_install: <a href="https://bootstrap.pypa.io/ez_setup.py">https://bootstrap.pypa.io/ez_setup.py</a></font></p>
