@@ -1,33 +1,1123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-03-14T14:23:20+08:00</updated>
+  <updated>2015-03-27T09:19:23+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[zylia]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[Test]]></title>
-    <link href="http://zylia.github.io/blog/2015/03/14/test/"/>
-    <updated>2015-03-14T14:23:07+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/03/14/test</id>
-    <content type="html"><![CDATA[
+    <title type="html"><![CDATA[Linux系统的/proc/maps文件分析]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/20/linux-maps/"/>
+    <updated>2015-03-20T16:48:04+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/20/linux-maps</id>
+    <content type="html"><![CDATA[<p>/proc/&lt;PID>/maps查看进程的虚拟地址空间是如何使用的，包括进程的代码段、栈区、堆区、动态库、内核区对应的虚拟地址，示例如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>34ae400000-34ae420000 r-xp 00000000 08:02 3932188                        /lib64/ld-2.12.so
+</span><span class='line'>34ae98a000-34aeb8a000 ---p 0018a000 08:02 3932226                        /lib64/libc-2.12.so
+</span><span class='line'>34af217000-34af218000 r--p 00017000 08:02 3932233                        /lib64/libpthread-2.12.so
+</span><span class='line'>34af682000-34af683000 r--p 00082000 08:02 3932228                        /lib64/libm-2.12.so</span></code></pre></td></tr></table></div></figure>
+
+
+<p>该文件有6列，分别为：
+<font size=3></p>
+
+<blockquote><ul>
+<li>地址：库在进程里地址范围</li>
+<li>权限：虚拟内存的权限，r=读，w=写，x=执行，s=共享，p=私有</li>
+<li>偏移量：库在进程里地址范围</li>
+<li>设备：映象文件的主设备号和次设备号</li>
+<li>节点：映像文件的节点号；</li>
+<li>路径：映像文件的路径。
+</font></li>
+</ul>
+</blockquote>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[New Home]]></title>
+    <title type="html"><![CDATA[收集多线程程序的性能数据]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/20/perf-event-open-lab/"/>
+    <updated>2015-03-20T11:07:56+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/20/perf-event-open-lab</id>
+    <content type="html"><![CDATA[<p>该篇blog讲如何用perf_event_open()系统调用收集多线程程序的性能数据。</p>
+
+<p>首先，我们需要检测该多线程程序开始运行后分配的进程号，以便后来能够跟踪。我们会用vfork()创建一个子进程，子进程和父进程共享同样的代码逻辑，并且都是从vfork()语句之后执行。子进程会先执行，父进程会先被阻塞。如果子进程调用exit()或者exec()，那么父进程会解除阻塞状态，恢复执行。<!-- more -->然后在子进程中调用execvp()运行多线程程序，一旦子进程调用execvp()，子进程就会返回，父进程会继续运行，这样我们就能获得多线程程序在运行时分配的进程号。vfork()系统调用会分别在父进程和子进程中返回。父进程会返回子进程的进程号，而在子进程中会返回0。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sprintf(line,"/parsec-2.1/pkgs/apps/blackscholes/inst/amd64-linux.gcc-openmp/bin/blackscholes 8 /parsec-2.1/pkgs/apps/blackscholes/inputs/in_64K.txt output.txt");
+</span><span class='line'>char *cmd[] = {"sh", "-c", line, NULL};
+</span><span class='line'>
+</span><span class='line'>iResult = vfork();
+</span><span class='line'>if (iResult &lt; 0)
+</span><span class='line'>{
+</span><span class='line'>     int err_code = errno;
+</span><span class='line'>   printf ("*** ERROR: fork failed for %s\n", strerror(err_code));
+</span><span class='line'>}
+</span><span class='line'>else if (iResult)  // 对于child process该值为0
+</span><span class='line'>{
+</span><span class='line'>   return iResult;
+</span><span class='line'>}
+</span><span class='line'>if (execvp("sh", cmd) &lt; 0){
+</span><span class='line'>     int err_code = errno;
+</span><span class='line'>     printf ("*** ERROR: exec failed for %s\n",strerror(err_code));
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在获得了多线程程序的进程号之后，我们需要知道该程序派生的线程数目以及它们的线程号。程序派生的线程号可以在&#8221;/proc/pid/task/&ldquo;目录中查看，我们通过统计该目录下的文件的个数并把文件名转换为线程号。</p>
+
+<p>在获得了程序所有的线程号后，我们给每一个线程用perf_event_open()建立一个记录性能数据的文件。首先，需要初始化一个perf_event_attr结构体，其中config1参数代表记录的延迟阈值。perf_event_open()新建了一个文件，并返回了该文件的文件描述符。当perf_event_open()工作在采样模式时，我们需要将该文件映射到内存才能进行读写操作。采用下面的语句将文件映射到length大小的缓存中，</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>metadata_page[index]= mmap(NULL, length, PROT_READ, MAP_SHARED, curfd, 0);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在该调用中，我们把perf_event_open()返回的文件描述符curfd作为参数传递给mmap()调用。然后，性能数据就会记录到metadata_page当中。</p>
+
+<p>接着调用PERF_EVENT_IOC_RESET和PERF_EVENT_IOC_ENABLE，性能监控事件开始运行。</p>
+
+<p>当多线程程序运行结束后，调用PERF_EVENT_IOC_DISABLE，停止记录性能监控数据。过滤掉metadata_page的头文件后，剩下的就是记录的性能采样数据。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[系统调用perf_event_open的使用说明]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/18/perf-event-open/"/>
+    <updated>2015-03-18T16:19:47+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/18/perf-event-open</id>
+    <content type="html"><![CDATA[<p>perf_event_open是用来实现intel的性能监控的功能。perf_event_open()返回一个文件描述符，该描述符可以在系统调用(read(2), mmap(2), prctl(2)等)中使用。</p>
+
+<p>调用perf_event_open()创建一个文件描述符，用来记录性能信息。每个被测量的事件对应一个文件描述符；它们能组合在一起同时测量多个事件。</p>
+
+<!-- more -->
+
+
+<p>启动和关闭性能测量事件对应下面两种方式：ioctl(2)和prctl(2)。当一个事件被失效时，它不再记录数据或者产生溢出，但是它仍然存在于内存中并且保持它的记录值。</p>
+
+<p>事件以两种方式被记录：couting和sampled。一个counting事件用来记录事件发生的总的次数。通常情况，counting事件用read(2)系统调用来收集。一个sampling事件周期性地写测量数据到一个缓存中，该缓存一般由mmap(2)调用访问。</p>
+
+<h2>概括</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;linux/perf_event.h&gt;
+</span><span class='line'>#include &lt;linux/hw_breakpoint.h&gt;
+</span><span class='line'>
+</span><span class='line'>int perf_event_open(struct perf_event_attr *attr,
+</span><span class='line'>                    pid_t pid, int cpu, int group_fd,
+</span><span class='line'>                    unsigned long flags);</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>pid和cpu参数</h2>
+
+<p><em>pid</em>和<em>cpu</em>参数用来描述监控哪个进程和CPU:</p>
+
+<p><strong>pid = 0 和 cpu = -1</strong>  <br />
+    用来监控位于任何CPU上的调用进程/线程。</p>
+
+<p><strong>pid = 0 和 cpu >= 0</strong>  <br />
+    用来监控位于特定CPU上的调用进程/线程。</p>
+
+<p><strong>pid > 0 和 cpu = -1</strong>  <br />
+    用来监控位于任何CPU上的特定进程/线程。</p>
+
+<p><strong>pid > 0 和 cpu >= 0</strong>  <br />
+    用来监控位于特定CPU上的特定进程/线程。</p>
+
+<p><strong>pid = -1 和 cpu >= 0</strong>  <br />
+用来监控在特定CPU上的所有进程/线程。这需要 <strong>CAP_SYS_ADMIN</strong>特性或者 /proc/sys/kernel/perf_event_paranoid值小于1。</p>
+
+<p><strong>pid = -1 和 cpu = -1</strong>  <br />
+这个设置是无效的并会返回错误。</p>
+
+<h2>group_fd参数</h2>
+
+<p><em>group_fd</em>参数允许建立事件组。一个事件组有一个事件被称为组长。首先建立组长，他的<em>group_id</em> = -1。接下来剩下的组员会用组长的文件描述符作为<em>group_fd</em>并用<strong>perf_event_open()</strong>建立。(单一事件将会以<em>group_fd</em> = -1来设定，并且认为该组只有一个成员)。一个事件组做为一个整体调度到CPU上：只有所有组内的事件都能被放在同一CPU上它才会放置在CPU上。这以为着组员事件的数值直接操作是有意义的&mdash;相加，相除，等等&mdash;因为他们是执行相同指令过程中的事件统计值。</p>
+
+<h2>flag参数</h2>
+
+<p><em>flags</em>参数由ORing和以下数值的0个或者多个组成：</p>
+
+<p><strong>PERF_FLAG_FD_CLOEXEC</strong> (since Linux 3.14)</p>
+
+<p>这个标志能使创建的事件文件描述符的close-on-exec标志有效，因此当调用execve(2)时，文件描述符能自动地关闭。应该在文件描述符创建的开始设置close-on-exec标志，而不是后来再用fcntl(2)设置，这能避免潜在的竞争条件，当线程调用perf_event_open()和fcntl(2)发生在另一个线程调用fork(2)然后执行execve(2)同一时刻的情况。</p>
+
+<p><strong>PERF_FLAG_FD_NO_GROUP</strong></p>
+
+<p>这个标志告诉事件忽略掉<em>group_fd</em>参数，除非是出现使用<strong>PERF_FLAG_FD_OUTPUT</strong>标志重定向输出的情况。</p>
+
+<p><strong>PERF_FLAG_FD_OUTPUT</strong> (broken since Linux 2.6.35)</p>
+
+<p>这个标志重新定位事件的采样输出，而不是按照惯例输出到由<em>group_fd</em>指定事件的mmap缓存中。</p>
+
+<p><strong>PERF_FLAG_PID_CGROUP</strong> (since Linux 2.6.39)</p>
+
+<p>这个标志激活了系统中每个容器范围内的监控。一个容器是一系列为了更细化控制而隔离出来的资源的抽象(CPUs, memory等等)。在这个模式下，只有当线程运行在属于被指定的容器中的CPU上(cgroup)时才进行监控。</p>
+
+<h2>perf_event_attr参数</h2>
+
+<p><em>perf_event_attr</em>结构体为创建的事件提供了详细的配置信息。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct perf_event_attr {
+</span><span class='line'>     __u32 type;         /* Type of event */
+</span><span class='line'>     __u32 size;         /* Size of attribute structure */
+</span><span class='line'>     __u64 config;       /* Type-specific configuration */
+</span><span class='line'>
+</span><span class='line'>     union {
+</span><span class='line'>         __u64 sample_period;    /* Period of sampling */
+</span><span class='line'>         __u64 sample_freq;      /* Frequency of sampling */
+</span><span class='line'>     };
+</span><span class='line'>
+</span><span class='line'>     __u64 sample_type;  /* Specifies values included in sample */
+</span><span class='line'>     __u64 read_format;  /* Specifies values returned in read */
+</span><span class='line'>
+</span><span class='line'>     __u64 disabled       : 1,   /* off by default */
+</span><span class='line'>           inherit        : 1,   /* children inherit it */
+</span><span class='line'>           pinned         : 1,   /* must always be on PMU */
+</span><span class='line'>           exclusive      : 1,   /* only group on PMU */
+</span><span class='line'>           exclude_user   : 1,   /* don't count user */
+</span><span class='line'>           exclude_kernel : 1,   /* don't count kernel */
+</span><span class='line'>           exclude_hv     : 1,   /* don't count hypervisor */
+</span><span class='line'>           exclude_idle   : 1,   /* don't count when idle */
+</span><span class='line'>           mmap           : 1,   /* include mmap data */
+</span><span class='line'>           comm           : 1,   /* include comm data */
+</span><span class='line'>           freq           : 1,   /* use freq, not period */
+</span><span class='line'>           inherit_stat   : 1,   /* per task counts */
+</span><span class='line'>           enable_on_exec : 1,   /* next exec enables */
+</span><span class='line'>           task           : 1,   /* trace fork/exit */
+</span><span class='line'>           watermark      : 1,   /* wakeup_watermark */
+</span><span class='line'>           precise_ip     : 2,   /* skid constraint */
+</span><span class='line'>           mmap_data      : 1,   /* non-exec mmap data */
+</span><span class='line'>           sample_id_all  : 1,   /* sample_type all events */
+</span><span class='line'>           exclude_host   : 1,   /* don't count in host */
+</span><span class='line'>           exclude_guest  : 1,   /* don't count in guest */
+</span><span class='line'>           exclude_callchain_kernel : 1,
+</span><span class='line'>                           /* exclude kernel callchains */
+</span><span class='line'>           exclude_callchain_user   : 1,
+</span><span class='line'>                           /* exclude user callchains */
+</span><span class='line'>           mmap2          :  1,  /* include mmap with inode data */
+</span><span class='line'>           comm_exec      :  1,  /* flag comm events that are due to exec */
+</span><span class='line'>           __reserved_1   : 39;
+</span><span class='line'>
+</span><span class='line'>     union {
+</span><span class='line'>         __u32 wakeup_events;    /* wakeup every n events */
+</span><span class='line'>         __u32 wakeup_watermark; /* bytes before wakeup */
+</span><span class='line'>     };
+</span><span class='line'>         
+</span><span class='line'>     __u32     bp_type;          /* breakpoint type */
+</span><span class='line'>
+</span><span class='line'>     union {
+</span><span class='line'>         __u64 bp_addr;          /* breakpoint address */
+</span><span class='line'>         __u64 config1;          /* extension of config */
+</span><span class='line'>     };
+</span><span class='line'>
+</span><span class='line'>     union {
+</span><span class='line'>         __u64 bp_len;           /* breakpoint length */
+</span><span class='line'>         __u64 config2;          /* extension of config1 */
+</span><span class='line'>     };
+</span><span class='line'>     __u64 branch_sample_type;   /* enum perf_branch_sample_type */
+</span><span class='line'>     __u64 sample_regs_user;     /* user regs to dump on samples */
+</span><span class='line'>     __u32 sample_stack_user;    /* size of stack to dump on
+</span><span class='line'>                                    samples */
+</span><span class='line'>     __u32 __reserved_2;         /* Align to u64 */
+</span><span class='line'>
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>perf_event_attr</em>中的各个域多并且复杂，我们分别叙述如下：</p>
+
+<p>1)<em>type</em>域设置</p>
+
+<p><em>type</em> 描述了整个事件类型。它的值是以下几种类型之一：</p>
+
+<p><font size=3>
+　　<strong>PERF_TYPE_HARDWARE</strong>  <br />
+　　<strong>PERF_TYPE_SOFTWARE</strong>  <br />
+　　<strong>PERF_TYPE_TRACEPOINT</strong>  <br />
+　　<strong>PERF_TYPE_HW_CACHE</strong>  <br />
+　　<strong>PERF_TYPE_RAW</strong>  <br />
+　　<strong>PERF_TYPE_BREAKPOINT</strong></font></p>
+
+<p>2)<em>size</em>域设置</p>
+
+<p><em>size</em> 描述了<em>perf_event_attr</em>结构体的大小。</p>
+
+<p>3)<em>config</em>域设置</p>
+
+<p><em>config</em> 和<em>type</em>域一起使用，描述你想要的事件类型。当64位无法满足描述事件类型的要求，<em>config1</em>和<em>config2</em>也被拿来一起使用。这些域的编码依赖于特定的事件。</p>
+
+<p><em>config</em>域的类型有很多种，该值依赖于前面描述的<em>type</em>域。随着<em>type</em>域的不同，设置<em>config</em>域的类型也不尽相同。</p>
+
+<p>如果<em>type</em>是<strong>PERF_TYPE_HARDWARE</strong>，我们在测量普通的CPU硬件事件。并不是这些事件都适合所有的平台。设置<em>config</em>为下面值的其中之一：</p>
+
+<p><font size=3>
+　　<strong>PERF_COUNT_HW_CPU_CYCLES</strong>  <br />
+　　<strong>PERF_COUNT_HW_INSTRUCTIONS</strong>  <br />
+　　<strong>PERF_COUNT_HW_CACHE_REFERENCES</strong>  <br />
+　　<strong>PERF_COUNT_HW_CACHE_MISSES</strong>  <br />
+　　<strong>PERF_COUNT_HW_BRANCH_INSTRUCTIONS</strong>  <br />
+　　<strong>PERF_COUNT_HW_BRANCH_MISSES</strong>  <br />
+　　<strong>PERF_COUNT_HW_BUS_CYCLES</strong>  <br />
+　　<strong>PERF_COUNT_HW_STALLED_CYCLES_FRONTEND</strong>：在发送指令时的延迟。  <br />
+　　<strong>PERF_COUNT_HW_STALLED_CYCLES_BACKEND</strong>：指令执行完后的延迟。  <br />
+　　<strong>PERF_COUNT_HW_REF_CPU_CYCLES</strong></font></p>
+
+<p>如果<em>type</em>是<strong>PERF_TYPE_SOFTWARE</strong>，我们在测量内核提供的软件事件。设置<em>config</em>为以下几种类型之一：</p>
+
+<p><font size=3>
+　　<strong>PERF_COUNT_SW_CPU_CLOCK</strong>  <br />
+　　<strong>PERF_COUNT_SW_TASK_CLOCK</strong>  <br />
+　　<strong>PERF_COUNT_SW_PAGE_FAULTS</strong>  <br />
+　　<strong>PERF_COUNT_SW_CONTEXT_SWITCHES</strong>  <br />
+　　<strong>PERF_COUNT_SW_CPU_MIGRATIONS</strong>  <br />
+　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MIN</strong>  <br />
+　　<strong>PERF_COUNT_SW_PAGE_FAULTS_MAJ</strong></font> 等等。</p>
+
+<p>如果<em>type</em>是<strong>PERF_TYPE_RAW</strong>，那么需要一个定制的“raw” config值。大多数CPU支持的事件不包含在普通事件中。它们是由实现定义的；参照你的CPU手册(例如Intel Volume 3B文档)。libpfm4库能够用来转换体系结构手册里的名字到perf_event_open()在这个域中想要的十六进制值。</p>
+
+<p>4)<em>sample_type</em>域设置</p>
+
+<p>用来描述sample中包含哪些值。</p>
+
+<h2>读取结果</h2>
+
+<h3>以计数模式运行的情况</h3>
+
+<p>当<strong>perf_event_open()</strong>文件描述符被打开后，事件的值能够从文件描述符中读取。这个值通过<em>attr</em>结构体的<em>read_format</em>域设定。</p>
+
+<p>如果你想要存储的缓存无法放下所有的数据，将会返回<strong>ENOSPC</strong>。</p>
+
+<h3>以采样模式运行的情况</h3>
+
+<p>当以采样模式使用<strong>perf_event_open()</strong>时，事件的结果记录在一个环形缓存中。该环形缓存用mmap(2)创建和访问。</p>
+
+<p>mmap的大小应该是1+2<sup>n</sup> 页，第一个页是metadata页(<em>struct perf_event_mmap_page</em>)，它包括环形缓存在内存中起始位置的信息。</p>
+
+<p>第一个metadata mmap页的结构如下所示：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct perf_event_mmap_page {
+</span><span class='line'>     __u32 version;        /* version number of this structure */
+</span><span class='line'>     __u32 compat_version; /* lowest version this is compat with */
+</span><span class='line'>     __u32 lock;           /* seqlock for synchronization */
+</span><span class='line'>     __u32 index;          /* hardware counter identifier */
+</span><span class='line'>     __s64 offset;         /* add to hardware counter value */
+</span><span class='line'>     __u64 time_enabled;   /* time event active */
+</span><span class='line'>     __u64 time_running;   /* time event on CPU */
+</span><span class='line'>     union {
+</span><span class='line'>         __u64   capabilities;
+</span><span class='line'>         struct {
+</span><span class='line'>             __u64 cap_usr_time / cap_usr_rdpmc / cap_bit0 : 1,
+</span><span class='line'>             cap_bit0_is_deprecated : 1,
+</span><span class='line'>             cap_user_rdpmc         : 1,
+</span><span class='line'>             cap_user_time          : 1,
+</span><span class='line'>             cap_user_time_zero     : 1,
+</span><span class='line'>         };
+</span><span class='line'>     };
+</span><span class='line'>     __u16 pmc_width;
+</span><span class='line'>     __u16 time_shift;
+</span><span class='line'>     __u32 time_mult;：
+</span><span class='line'>     __u64 time_offset;
+</span><span class='line'>     __u64 __reserved[120];   /* Pad to 1k */
+</span><span class='line'>     __u64 data_head;         /* head in the data section */
+</span><span class='line'>     __u64 data_tail;         /* user-space written tail */
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>剩下的2<sup>n</sup>环形缓存页具有如下所示的布局：</p>
+
+<p>该环形缓存的mmap值以一个header开始：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct perf_event_header {
+</span><span class='line'>     __u32   type;
+</span><span class='line'>     __u16   misc;
+</span><span class='line'>     __u16   size;
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果<em>type</em>的值是<strong>PERF_RECORD_SAMPLE</strong>，那么记录的信息如下面的格式:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct {
+</span><span class='line'>     struct perf_event_header header;
+</span><span class='line'>     u64   sample_id;  /* if PERF_SAMPLE_IDENTIFIER */
+</span><span class='line'>     u64   ip;         /* if PERF_SAMPLE_IP */
+</span><span class='line'>     u32   pid, tid;   /* if PERF_SAMPLE_TID */
+</span><span class='line'>     u64   time;       /* if PERF_SAMPLE_TIME */
+</span><span class='line'>     u64   addr;       /* if PERF_SAMPLE_ADDR */
+</span><span class='line'>     u64   id;         /* if PERF_SAMPLE_ID */
+</span><span class='line'>     u64   stream_id;  /* if PERF_SAMPLE_STREAM_ID */
+</span><span class='line'>     u32   cpu, res;   /* if PERF_SAMPLE_CPU */
+</span><span class='line'>     u64   period;     /* if PERF_SAMPLE_PERIOD */
+</span><span class='line'>     struct read_format v; /* if PERF_SAMPLE_READ */
+</span><span class='line'>     u64   nr;         /* if PERF_SAMPLE_CALLCHAIN */
+</span><span class='line'>     u64   ips[nr];    /* if PERF_SAMPLE_CALLCHAIN */
+</span><span class='line'>     u32   size;       /* if PERF_SAMPLE_RAW */
+</span><span class='line'>     char  data[size]; /* if PERF_SAMPLE_RAW */
+</span><span class='line'>     u64   bnr;        /* if PERF_SAMPLE_BRANCH_STACK */
+</span><span class='line'>     struct perf_branch_entry lbr[bnr];
+</span><span class='line'>                       /* if PERF_SAMPLE_BRANCH_STACK */
+</span><span class='line'>     u64   abi;        /* if PERF_SAMPLE_REGS_USER */
+</span><span class='line'>     u64   regs[weight(mask)];
+</span><span class='line'>                       /* if PERF_SAMPLE_REGS_USER */
+</span><span class='line'>     u64   size;       /* if PERF_SAMPLE_STACK_USER */
+</span><span class='line'>     char  data[size]; /* if PERF_SAMPLE_STACK_USER */
+</span><span class='line'>     u64   dyn_size;   /* if PERF_SAMPLE_STACK_USER */
+</span><span class='line'>     u64   weight;     /* if PERF_SAMPLE_WEIGHT */
+</span><span class='line'>     u64   data_src;   /* if PERF_SAMPLE_DATA_SRC */
+</span><span class='line'>     u64   transaction;/* if PERF_SAMPLE_TRANSACTION */
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NUMA架构的程序性能分析工具MemProf]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/18/memprof/"/>
+    <updated>2015-03-18T15:40:50+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/18/memprof</id>
+    <content type="html"><![CDATA[<p>&ldquo;MemProf: a Memory Profiler for NUMA Multicore Systems&#8221;是发表在计算机系统领域顶级会议USENIX Annual Technical Conference(ATC &lsquo;14)上。作者提出了一个分析工具，能够建立线程和内存对象之间的交互信息，帮助程序员理解为什么和哪些内存对象是远端访问。</p>
+
+<!-- more -->
+
+
+<p>作者在文章中指出，应用程序级别的优化技术有以下一些缺点；对于程序员来说很难决定一个给定的程序/工作集可以用哪些优化策略。我们需要知道线程和内存对象之间的交互信息，例如，在程序运行的任何时刻点知道哪些线程访问哪些内存对象，以及每次内存访问请求的发送和接受节点的详细信息。然而，现有的分析工具，例如OProfile，Linux Perf，VTune和Memphis都无法提供这些信息。这些工具有些能够提供全局静态内存对象的信息，但是这些对象只占据了所有远端内存访问的很小一部分比例。作者做实验发现这些全局静态内存对象只占用了少于4%的总远端访问次数。对于其他内存对象，现有的分析工具只提供了有限的信息，例如指令访问的目标内存地址和触发该访问的程序指令。</p>
+
+<p>MemProf建立了线程和它访问的内存对象之间的关联。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux的虚拟内存管理(转载)]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/17/virtual-memory/"/>
+    <updated>2015-03-17T10:32:30+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/17/virtual-memory</id>
+    <content type="html"><![CDATA[<p>一个进程的虚拟地址空间主要由两个数据结来描述。一个是最高层次的：mm_struct，一个是较高层次的：vm_area_struct。
+最高层次的mm_struct结构描述了一个进程的整个虚拟地址空间。较高层次的结构vm_area_struct描述了虚拟地址空间的一个区间（简称虚拟区）。
+mm_struct定义在include/linux/mm_types.h中，其中的域抽象了进程的地址空间。其中：</p>
+
+<!-- more -->
+
+
+<p>[start_code,end_code)表示代码段的地址空间范围。  <br  />
+[start_data,end_start)表示数据段的地址空间范围。  <br  />
+[start_brk,brk)分别表示heap段的起始空间和当前的heap指针。  <br  />
+[start_stack,end_stack)表示stack段的地址空间范围。  <br  />
+mmap_base表示memory mapping段的起始地址。<strong>那为什么mmap段没有结束的地址呢？</strong></p>
+
+<p>实验内容：在proc文件系统下，建立一个文件，每次向这个文件写入字符时，调用相应的虚拟内存处理函数。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+<span class='line-number'>192</span>
+<span class='line-number'>193</span>
+<span class='line-number'>194</span>
+<span class='line-number'>195</span>
+<span class='line-number'>196</span>
+<span class='line-number'>197</span>
+<span class='line-number'>198</span>
+<span class='line-number'>199</span>
+<span class='line-number'>200</span>
+<span class='line-number'>201</span>
+<span class='line-number'>202</span>
+<span class='line-number'>203</span>
+<span class='line-number'>204</span>
+<span class='line-number'>205</span>
+<span class='line-number'>206</span>
+<span class='line-number'>207</span>
+<span class='line-number'>208</span>
+<span class='line-number'>209</span>
+<span class='line-number'>210</span>
+<span class='line-number'>211</span>
+<span class='line-number'>212</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/*
+</span><span class='line'>mtest_dump_vma_list():print each VMA of current process, we call this function ”listvma”
+</span><span class='line'>mtest_find_vma():find the VMA of virtual address, we call this function “findvma”
+</span><span class='line'>my_follow_page():according to page table, we calculate the physical page of the virtual address, we call this function ”findpage”
+</span><span class='line'>mtest_write_val():write data on the specific address, we call this function “writeval”.
+</span><span class='line'>*/
+</span><span class='line'>#include &lt;linux/module.h&gt;
+</span><span class='line'>#include &lt;linux/kernel.h&gt;
+</span><span class='line'>#include &lt;linux/proc_fs.h&gt;
+</span><span class='line'>#include &lt;linux/string.h&gt;
+</span><span class='line'>#include &lt;linux/vmalloc.h&gt;
+</span><span class='line'>#include &lt;asm/uaccess.h&gt;
+</span><span class='line'>#include &lt;linux/init.h&gt;
+</span><span class='line'>#include &lt;linux/slab.h&gt;
+</span><span class='line'>#include &lt;linux/mm.h&gt;
+</span><span class='line'>#include &lt;linux/vmalloc.h&gt;
+</span><span class='line'>MODULE_LICENSE("GPL");
+</span><span class='line'>/*
+</span><span class='line'>how to write code to look at which visual areas do the process allocate
+</span><span class='line'>*/
+</span><span class='line'>
+</span><span class='line'>static void mtest_dump_vma_list(void)
+</span><span class='line'>{
+</span><span class='line'>  struct mm_struct * mm = current-&gt;mm;
+</span><span class='line'>  struct vm_area_struct *vma;
+</span><span class='line'>  printk("The current process is %s\n",current-&gt;comm);
+</span><span class='line'>  printk("mtest_dump_vma_list\n");
+</span><span class='line'>  down_read(&mm-&gt;mmap_sem);
+</span><span class='line'>  for (vma = mm-&gt;mmap; vma; vma = vma-&gt;vm_next) {
+</span><span class='line'>    printk("VMA 0x%lx-0x%lx ", vma-&gt;vm_start, vma-&gt;vm_end);
+</span><span class='line'>    if (vma-&gt;vm_flags & VM_WRITE)
+</span><span class='line'>      printk("WRITE ");
+</span><span class='line'>    if (vma-&gt;vm_flags & VM_READ)
+</span><span class='line'>      printk("READ ");
+</span><span class='line'>    if (vma-&gt;vm_flags & VM_EXEC)
+</span><span class='line'>      printk("EXEC ");
+</span><span class='line'>    printk("\n");
+</span><span class='line'>  }
+</span><span class='line'>  up_read(&mm-&gt;mmap_sem);
+</span><span class='line'>}
+</span><span class='line'>/*
+</span><span class='line'>if we know the specific virtual address, for example, 0x8049000. How do we find which VMA does this virtual address allocate?
+</span><span class='line'>*/
+</span><span class='line'>static void mtest_find_vma(unsigned long addr)
+</span><span class='line'>{
+</span><span class='line'>  struct vm_area_struct *vma;
+</span><span class='line'>  struct mm_struct * mm = current-&gt;mm;
+</span><span class='line'>  printk("mtest_find_vma\n");
+</span><span class='line'>  down_read(&mm-&gt;mmap_sem);
+</span><span class='line'>  vma = find_vma(mm, addr);
+</span><span class='line'>  if (vma && addr &gt;= vma-&gt;vm_start) {
+</span><span class='line'>    printk("found vma 0x%lx-0x%lx flag %lx for addr 0x%lx\n", vma-&gt;vm_start, vma-&gt;vm_end, vma-&gt;vm_flags, addr);
+</span><span class='line'>  } else {
+</span><span class='line'>    printk("no vma found for %lx\n", addr);
+</span><span class='line'>  }
+</span><span class='line'>  up_read(&mm-&gt;mmap_sem);
+</span><span class='line'>}
+</span><span class='line'>/*
+</span><span class='line'>A physical page is described as struct page in the kernel.
+</span><span class='line'>Given the virtual area VMA and the virtual address, find the physical page of this address.
+</span><span class='line'>*/
+</span><span class='line'>static struct page *my_follow_page(struct vm_area_struct *vma, unsigned long addr)
+</span><span class='line'>{
+</span><span class='line'>  pud_t *pud;
+</span><span class='line'>  pmd_t *pmd;
+</span><span class='line'>  pgd_t *pgd;
+</span><span class='line'>  pte_t *pte;
+</span><span class='line'>  spinlock_t *ptl;
+</span><span class='line'>  struct page *page = NULL;
+</span><span class='line'>  struct mm_struct *mm = vma-&gt;vm_mm;
+</span><span class='line'>  pgd = pgd_offset(mm, addr);
+</span><span class='line'>  if (pgd_none(*pgd) || unlikely(pgd_bad(*pgd))) {
+</span><span class='line'>    goto out;
+</span><span class='line'>  }
+</span><span class='line'>  pud = pud_offset(pgd, addr);
+</span><span class='line'>  if (pud_none(*pud) || unlikely(pud_bad(*pud)))
+</span><span class='line'>    goto out;
+</span><span class='line'>  pmd = pmd_offset(pud, addr);
+</span><span class='line'>  if (pmd_none(*pmd) || unlikely(pmd_bad(*pmd))) {
+</span><span class='line'>    goto out;
+</span><span class='line'>  }
+</span><span class='line'>  pte = pte_offset_map_lock(mm, pmd, addr, &ptl);
+</span><span class='line'>  if (!pte)
+</span><span class='line'>    goto out;
+</span><span class='line'>  if (!pte_present(*pte))
+</span><span class='line'>    goto unlock;
+</span><span class='line'>  page = pfn_to_page(pte_pfn(*pte));
+</span><span class='line'>  if (!page)
+</span><span class='line'>    goto unlock;
+</span><span class='line'>  get_page(page);
+</span><span class='line'>unlock:
+</span><span class='line'>  pte_unmap_unlock(pte, ptl);
+</span><span class='line'>out:
+</span><span class='line'>  return page;
+</span><span class='line'>}
+</span><span class='line'>/*
+</span><span class='line'>According to the page table, calculate the physical page of the virtual address. We call this function "my_follow_page"
+</span><span class='line'>*/
+</span><span class='line'>static void mtest_find_page(unsigned long addr)
+</span><span class='line'>{
+</span><span class='line'>  struct vm_area_struct *vma;
+</span><span class='line'>  struct mm_struct *mm = current-&gt;mm;
+</span><span class='line'>  unsigned long kernel_addr;
+</span><span class='line'>  struct page *page;
+</span><span class='line'>  printk("mtest_write_val\n");
+</span><span class='line'>  down_read(&mm-&gt;mmap_sem);
+</span><span class='line'>  vma = find_vma(mm, addr);
+</span><span class='line'>  page = my_follow_page(vma, addr);
+</span><span class='line'>  if (!page)
+</span><span class='line'>  {
+</span><span class='line'>    printk("page not found for 0x%lx\n", addr);
+</span><span class='line'>    goto out;
+</span><span class='line'>  }
+</span><span class='line'>  printk("page  found for 0x%lx\n", addr);
+</span><span class='line'>  kernel_addr = (unsigned long)page_address(page);
+</span><span class='line'>  kernel_addr += (addr&~PAGE_MASK);
+</span><span class='line'>  printk("find 0x%lx to kernel address 0x%lx\n", addr, kernel_addr);
+</span><span class='line'>out:
+</span><span class='line'>  up_read(&mm-&gt;mmap_sem);
+</span><span class='line'>}
+</span><span class='line'>/*
+</span><span class='line'>Whether you have the follow thought, write the data you want to the specific address?
+</span><span class='line'>*/
+</span><span class='line'>static void mtest_write_val(unsigned long addr, unsigned long val)
+</span><span class='line'>{
+</span><span class='line'>  struct vm_area_struct *vma;
+</span><span class='line'>  struct mm_struct *mm = current-&gt;mm;
+</span><span class='line'>  struct page *page;
+</span><span class='line'>  unsigned long kernel_addr;
+</span><span class='line'>  printk("mtest_write_val\n");
+</span><span class='line'>  down_read(&mm-&gt;mmap_sem);
+</span><span class='line'>  vma = find_vma(mm, addr);
+</span><span class='line'>  if (vma && addr &gt;= vma-&gt;vm_start && (addr + sizeof(val)) &lt; vma-&gt;vm_end) {
+</span><span class='line'>    if (!(vma-&gt;vm_flags & VM_WRITE)) {
+</span><span class='line'>      printk("vma is not writable for 0x%lx\n", addr);
+</span><span class='line'>      goto out;
+</span><span class='line'>    }
+</span><span class='line'>    page = my_follow_page(vma, addr);
+</span><span class='line'>    if (!page) {
+</span><span class='line'>      printk("page not found for 0x%lx\n", addr);
+</span><span class='line'>      goto out;
+</span><span class='line'>    }
+</span><span class='line'>    kernel_addr = (unsigned long)page_address(page);
+</span><span class='line'>    kernel_addr += (addr&~PAGE_MASK);
+</span><span class='line'>    printk("write 0x%lx to address 0x%lx\n", val, kernel_addr);
+</span><span class='line'>    *(unsigned long *)kernel_addr = val;
+</span><span class='line'>    put_page(page);
+</span><span class='line'>  } else {
+</span><span class='line'>      printk("no vma found for %lx\n", addr);
+</span><span class='line'>  }
+</span><span class='line'>out:
+</span><span class='line'>  up_read(&mm-&gt;mmap_sem);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>static ssize_t mtest_write(struct file *file, const char __user * buffer, size_t count, loff_t *data)
+</span><span class='line'>{
+</span><span class='line'>  char buf[128];
+</span><span class='line'>  unsigned long val, val2;
+</span><span class='line'>  printk("mtest_write ........ \n");
+</span><span class='line'>  if (count &gt; sizeof(buf))
+</span><span class='line'>    return -EINVAL;
+</span><span class='line'>  if (copy_from_user(buf, buffer, count))
+</span><span class='line'>    return -EINVAL;
+</span><span class='line'>  if (memcmp(buf, "listvma", 7) == 0)
+</span><span class='line'>    mtest_dump_vma_list();
+</span><span class='line'>  else if (memcmp(buf, "findvma", 7) == 0) {
+</span><span class='line'>    if (sscanf(buf + 7, "%lx", &val) == 1) {
+</span><span class='line'>      mtest_find_vma(val);
+</span><span class='line'>    }
+</span><span class='line'>  }
+</span><span class='line'>  else if (memcmp(buf, "findpage", 8) == 0) {
+</span><span class='line'>    if (sscanf(buf + 8, "%lx", &val) == 1) {
+</span><span class='line'>      mtest_find_page(val);
+</span><span class='line'>      //my_follow_page(vma, addr);
+</span><span class='line'>    }
+</span><span class='line'>  }
+</span><span class='line'>  else if (memcmp(buf, "writeval", 8) == 0) {
+</span><span class='line'>    if (sscanf(buf + 8, "%lx %lx", &val, &val2) == 2) {
+</span><span class='line'>      mtest_write_val(val, val2);
+</span><span class='line'>    }
+</span><span class='line'>  }
+</span><span class='line'>  return count;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>static struct file_operations proc_mtest_operations = {
+</span><span class='line'>  .write = mtest_write
+</span><span class='line'>};
+</span><span class='line'>
+</span><span class='line'>static struct proc_dir_entry *mtest_proc_entry;
+</span><span class='line'>//We realize all operations in the form of mode. Therefore, the function of mode initialization and quit as shown below:
+</span><span class='line'>static int __init mtest_init(void)
+</span><span class='line'>{
+</span><span class='line'>  mtest_proc_entry = create_proc_entry("mtest", 0777, NULL);
+</span><span class='line'>  if (mtest_proc_entry == NULL) {
+</span><span class='line'>    printk("Error creating proc entry\n");
+</span><span class='line'>    return -1;
+</span><span class='line'>  }
+</span><span class='line'>  printk("create the filename mtest mtest_init sucess  \n");
+</span><span class='line'>  mtest_proc_entry-&gt;proc_fops = &proc_mtest_operations;
+</span><span class='line'>  return 0;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>static void __exit mtest_exit(void)
+</span><span class='line'>{
+</span><span class='line'>  printk("exit the module......mtest_exit \n");
+</span><span class='line'>  remove_proc_entry("mtest", NULL);
+</span><span class='line'>}
+</span><span class='line'>MODULE_LICENSE("GPL");
+</span><span class='line'>MODULE_DESCRIPTION("mtest");
+</span><span class='line'>MODULE_AUTHOR("Zou Nan hai");
+</span><span class='line'>module_init(mtest_init);
+</span><span class='line'>module_exit(mtest_exit);</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>转载链接: <a href="http://www.kerneltravel.net/?p=450">http://www.kerneltravel.net/?p=450</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Window 7配置octopress]]></title>
+    <link href="http://zylia.github.io/blog/2015/03/14/octopress/"/>
+    <updated>2015-03-14T14:23:07+08:00</updated>
+    <id>http://zylia.github.io/blog/2015/03/14/octopress</id>
+    <content type="html"><![CDATA[<p>受一位同仁经常用octopress写博客的启发，我也准备搭个博客。</p>
+
+<p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>
+
+<!-- more -->
+
+
+<p><font size=3>
+1) Git: <a href="http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe">http://msysgit.googlecode.com/files/Git-1.8.1.2-preview20130201.exe</a></p>
+
+<p>2) Ruby: <a href="http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe">http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe</a></p>
+
+<p>3) DevKit: <a href="http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></p>
+
+<p>4) Python: <a href="http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi">http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi</a></p>
+
+<p>5) easy_install: <a href="https://bootstrap.pypa.io/ez_setup.py">https://bootstrap.pypa.io/ez_setup.py</a></font></p>
+
+<p>经过测试，这些软件版本可以安装成功。</p>
+
+<h2>安装</h2>
+
+<p><strong>安装Git</strong></p>
+
+<p>一路next就可以。</p>
+
+<p><strong>安装Ruby</strong></p>
+
+<p>也是一路next，记得勾选&#8221;Add Ruby executables to your PATH&#8221;，将Ruby的执行变量加入到环境变量中。</p>
+
+<p><strong>安装DevKit</strong></p>
+
+<p>DevKit是一个自解压文件，建议解压到D:/DevKit，需要注意解压目录中没有中文和空格。解压DevKit后，在命令行输入以下命令来安装：</p>
+
+<p><code>d:</code>  <br />
+<code>cd DevKit</code>  <br />
+<code>ruby dk.rb init</code>  <br />
+<code>ruby dk.rb install</code></p>
+
+<p><strong>安装Python</strong></p>
+
+<p>也是一路next就可以。</p>
+
+<p><strong>安装easy_install</strong></p>
+
+<p>在Python中安装第三方库需要使用easy_install。我们用之前下载的ez_setup.py脚本来下载和安装easy_install。easy_install会安装在Python安装目录的Scripts目录中，需要将easy_install的安装目录(例如C:\Python27\Scripts)加入到环境变量中才能在命令行中使用easy_install命令。</p>
+
+<p>Pygments模块用来使博客的代码高亮，我们在命令提示符中输入以下命令安装Pygments:</p>
+
+<p><code>easy_install pygments</code></p>
+
+<p><strong>安装octopress</strong></p>
+
+<p>在GitBash中输入如下命令将octopress下载到本地：</p>
+
+<p><code>cd d:/GitProject</code></p>
+
+<p><code>git clone git://github.com/imathis/octopress.git octopress</code></p>
+
+<p>在使用git clone命令时，github会自动在本地建立master分支，在后面我们将会建立source分支专门保存博客代码。</p>
+
+<p>然后需要安装octopress的依赖项，安装依赖项需要用到Ruby的gem。由于国外的ruby站点经常会被屏蔽，我们使用国内的淘宝镜像作为gem的更新源：</p>
+
+<p><code>gem sources -r https://rubygems.org/</code></p>
+
+<p><code>gem sources -a http://ruby.taobao.org/</code></p>
+
+<p><code>gem sources -l</code></p>
+
+<p>我们会看到只有淘宝的链接。</p>
+
+<p>修改octopress目录下的Gemfile文件，将第一行的<code>https://rubygems.org/</code>修改为<code>http://ruby.taobao.org/</code></p>
+
+<p>在命令提示符中进入到octopress目录，输入下面命令安装依赖项</p>
+
+<p><code>gem install bundler</code></p>
+
+<p><code>bundle install</code></p>
+
+<p>输入下面命令安装octopress的默认主题</p>
+
+<p><code>rake install</code></p>
+
+<p>到此所有安装工作已经结束，输入下面命令:</p>
+
+<p><code>rake preview</code></p>
+
+<p>然后在浏览器中输入地址<a href="http://localhost:4000">http://localhost:4000</a></p>
+
+<p>就可以本地预览效果。</p>
+
+<h2>解决中文问题</h2>
+
+<p>需要在系统中加入如下环境变量：</p>
+
+<p>LANG=zh_CN.UTF-8</p>
+
+<p>LC_ALL=zh_CN.UTF-8</p>
+
+<h2>在octopress中添加文章</h2>
+
+<p>在命令提示符中进入octopress的安装目录，输入如下命令新建文章：</p>
+
+<p><code>rake new_post['new article']</code></p>
+
+<p>生成的文件存在source/_posts目录中。</p>
+
+<p>每次添加了新的博客文章后，需要执行下面命令才重新生成</p>
+
+<p><code>rake generate</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的新家]]></title>
     <link href="http://zylia.github.io/blog/2015/03/14/new-home/"/>
     <updated>2015-03-14T14:03:41+08:00</updated>
     <id>http://zylia.github.io/blog/2015/03/14/new-home</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>这是我的新家，欢迎大家多踩踩。</p>
 ]]></content>
   </entry>
   
