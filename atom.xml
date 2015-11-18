@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-11-18T09:14:25+08:00</updated>
+  <updated>2015-11-18T11:03:42+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -12,15 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Post Title]]></title>
-    <link href="http://zylia.github.io/blog/2015/11/17/post-title/"/>
-    <updated>2015-11-17T15:24:29+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/11/17/post-title</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Window 7配置octopress]]></title>
@@ -137,15 +128,6 @@
 <p>每次添加了新的博客文章后，需要执行下面命令才重新生成</p>
 
 <p><code>rake generate</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我的新家]]></title>
-    <link href="http://zylia.github.io/blog/2015/03/14/new-home/"/>
-    <updated>2015-03-14T14:03:41+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/03/14/new-home</id>
-    <content type="html"><![CDATA[<p>这是我的新家，欢迎大家多踩踩。</p>
 ]]></content>
   </entry>
   
