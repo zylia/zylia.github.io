@@ -9,8 +9,8 @@
   <meta name="author" content="zylia">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="内核的同步机制有原子操作(Atomic Operations)、自旋锁(Spin Locks)、读写自旋锁(Reader-Writer Spin Locks)、
+信号量(Semaphores)、读写信号量(Reader-Writer Semaphores)、Mutexes、Completion &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,7 +73,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/11/19/kernel-synchronization-method/">Kernel Synchronization Method</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/11/19/kernel-synchronization-method/">内核同步机制总结</a></h1>
     
     
       <p class="meta">
@@ -82,7 +82,7 @@
 
 
 
-<time class='entry-date' datetime='2015-11-19T00:00:00+08:00'><span class='date'>2015 年11 月19 日</span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-11-19T09:41:42+08:00'><span class='date'>2015 年11 月19 日</span> <span class='time'>9:41 am</span></time>
         
            | <a href="/blog/2015/11/19/kernel-synchronization-method/#disqus_thread"
              data-disqus-identifier="http://zylia.github.io/blog/2015/11/19/kernel-synchronization-method/">Comments</a>
@@ -92,7 +92,9 @@
   </header>
 
 
-  <div class="entry-content">
+  <div class="entry-content"><p>内核的同步机制有原子操作(Atomic Operations)、自旋锁(Spin Locks)、读写自旋锁(Reader-Writer Spin Locks)、
+信号量(Semaphores)、读写信号量(Reader-Writer Semaphores)、Mutexes、Completion Variables、
+BKL(Big Kernel Lock)、顺序锁(Sequential Lock)、禁止抢断(Preemption Disabling)、Barriers</p>
 </div>
   
   
@@ -164,7 +166,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/11/19/kernel-synchronization-method/">Kernel Synchronization Method</a>
+        <a href="/blog/2015/11/19/kernel-synchronization-method/">内核同步机制总结</a>
       </li>
     
       <li class="post">
@@ -176,7 +178,8 @@
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
+    <li class='category'><a href='/blog/categories/linux/'>linux (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
  
   </ul>
 </section><section>

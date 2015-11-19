@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-11-19T09:51:11+08:00</updated>
+  <updated>2015-11-19T09:52:58+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -14,11 +14,13 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Kernel Synchronization Method]]></title>
+    <title type="html"><![CDATA[内核同步机制总结]]></title>
     <link href="http://zylia.github.io/blog/2015/11/19/kernel-synchronization-method/"/>
-    <updated>2015-11-19T00:00:00+08:00</updated>
+    <updated>2015-11-19T09:41:42+08:00</updated>
     <id>http://zylia.github.io/blog/2015/11/19/kernel-synchronization-method</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>内核的同步机制有原子操作(Atomic Operations)、自旋锁(Spin Locks)、读写自旋锁(Reader-Writer Spin Locks)、
+信号量(Semaphores)、读写信号量(Reader-Writer Semaphores)、Mutexes、Completion Variables、
+BKL(Big Kernel Lock)、顺序锁(Sequential Lock)、禁止抢断(Preemption Disabling)、Barriers</p>
 ]]></content>
   </entry>
   
