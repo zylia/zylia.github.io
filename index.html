@@ -9,7 +9,7 @@
   <meta name="author" content="zylia">
 
   
-  <meta name="description" content="内核的同步机制总结如下： 英文名 中文名 可睡眠 可被内核抢占 可嵌套 可用在中断句柄中 Atomic Operations 原子操作 否 否 否 是 Spin Locks 自旋锁 否 否 否 是 Reader-Writer Spin Locks 读写自旋锁 否 否 否 是 Semaphores &hellip;">
+  <meta name="description" content="内核的同步机制总结如下： 英文名 中文名 可睡眠 可被内核抢占 可嵌套 可用在中断句柄中 Atomic Operations 原子操作 否 否 否 是 Spin Locks 自旋锁 否 否 否 是 Reader-Writer Spin Locks 读写自旋锁 否 否 读(是)写(否) 是 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -127,7 +127,7 @@
 <td> 读写自旋锁  </td>
 <td style="text-align:center;"> 否     </td>
 <td style="text-align:center;"> 否           </td>
-<td style="text-align:center;"> 否      </td>
+<td style="text-align:center;"> 读(是)写(否)      </td>
 <td style="text-align:center;"> 是               </td>
 </tr>
 <tr>
@@ -196,6 +196,16 @@
 </tr>
 </tbody>
 </table>
+
+
+<p>内核设计中避免产生死锁的几点考虑：</p>
+
+<ul>
+<li>自旋锁不可嵌套。如果可嵌套的话，那么意味着要尝试获得一个已经被占有的锁。而自旋锁会不断忙等，被占有的锁不会被释放。</li>
+<li>使用自旋锁时，需要关闭本地中断。否则，中断句柄想要尝试获得已经被占有的锁。中断句柄会忙等，而持有锁的代码得不到执行的机会。
+值得注意的是，其他处理器并不需要关中断，因为持有锁的代码最终会在本地执行完，并释放锁。</li>
+<li>Mutexes不可嵌套。道理和自旋锁一样。</li>
+</ul>
 
 </div>
   
