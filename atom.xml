@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-11-19T11:18:15+08:00</updated>
+  <updated>2015-11-19T11:24:31+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -25,100 +25,100 @@
 <tr>
 <th> 英文名                   </th>
 <th> 中文名      </th>
-<th> 可睡眠 </th>
-<th> 可被内核抢占 </th>
-<th> 可嵌套  </th>
-<th> 可用在中断句柄中 </th>
+<th style="text-align:center;"> 可睡眠 </th>
+<th style="text-align:center;"> 可被内核抢占 </th>
+<th style="text-align:center;"> 可嵌套  </th>
+<th style="text-align:center;"> 可用在中断句柄中 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td> Atomic Operations        </td>
 <td> 原子操作    </td>
-<td> 否     </td>
-<td> 否           </td>
-<td> 否      </td>
-<td> 是               </td>
+<td style="text-align:center;"> 否     </td>
+<td style="text-align:center;"> 否           </td>
+<td style="text-align:center;"> 否      </td>
+<td style="text-align:center;"> 是               </td>
 </tr>
 <tr>
 <td> Spin Locks               </td>
 <td> 自旋锁      </td>
-<td> 否     </td>
-<td> 否           </td>
-<td> 否      </td>
-<td> 是               </td>
+<td style="text-align:center;"> 否     </td>
+<td style="text-align:center;"> 否           </td>
+<td style="text-align:center;"> 否      </td>
+<td style="text-align:center;"> 是               </td>
 </tr>
 <tr>
 <td> Reader-Writer Spin Locks </td>
 <td> 读写自旋锁  </td>
-<td> 否     </td>
-<td> 否           </td>
-<td> 否      </td>
-<td> 是               </td>
+<td style="text-align:center;"> 否     </td>
+<td style="text-align:center;"> 否           </td>
+<td style="text-align:center;"> 否      </td>
+<td style="text-align:center;"> 是               </td>
 </tr>
 <tr>
 <td> Semaphores               </td>
 <td> 信号量      </td>
-<td> 是     </td>
-<td> 是           </td>
-<td> 是      </td>
-<td> 否               </td>
+<td style="text-align:center;"> 是     </td>
+<td style="text-align:center;"> 是           </td>
+<td style="text-align:center;"> 是      </td>
+<td style="text-align:center;"> 否               </td>
 </tr>
 <tr>
 <td> Reader-Writer Semaphores </td>
 <td> 读写信号量  </td>
-<td> 是     </td>
-<td> 是           </td>
-<td> 是      </td>
-<td> 否               </td>
+<td style="text-align:center;"> 是     </td>
+<td style="text-align:center;"> 是           </td>
+<td style="text-align:center;"> 是      </td>
+<td style="text-align:center;"> 否               </td>
 </tr>
 <tr>
 <td> Mutexes                  </td>
 <td> Mutexes     </td>
-<td> 是     </td>
-<td> 否           </td>
-<td> 否      </td>
-<td> 否               </td>
+<td style="text-align:center;"> 是     </td>
+<td style="text-align:center;"> 否           </td>
+<td style="text-align:center;"> 否      </td>
+<td style="text-align:center;"> 否               </td>
 </tr>
 <tr>
 <td> Completion Variables     </td>
 <td> 完成变量    </td>
-<td> 是     </td>
-<td> 是           </td>
-<td> 否      </td>
-<td> 否               </td>
+<td style="text-align:center;"> 是     </td>
+<td style="text-align:center;"> 是           </td>
+<td style="text-align:center;"> 否      </td>
+<td style="text-align:center;"> 否               </td>
 </tr>
 <tr>
 <td> BKL(Big Kernel Locks)    </td>
 <td> 大内核锁    </td>
-<td> 是     </td>
-<td> 是           </td>
-<td> 是      </td>
-<td> 否               </td>
+<td style="text-align:center;"> 是     </td>
+<td style="text-align:center;"> 是           </td>
+<td style="text-align:center;"> 是      </td>
+<td style="text-align:center;"> 否               </td>
 </tr>
 <tr>
 <td> Sequential Locks         </td>
 <td> 顺序锁      </td>
-<td> 是     </td>
-<td> 读是写否     </td>
-<td> 读是写否</td>
-<td> 读是写否         </td>
+<td style="text-align:center;"> 是     </td>
+<td style="text-align:center;"> 读(是)写(否) </td>
+<td style="text-align:center;"> 读(是)写(否)</td>
+<td style="text-align:center;"> 读(是)写(否)         </td>
 </tr>
 <tr>
 <td> Preemption Disabling     </td>
 <td> 禁止抢占    </td>
-<td> 否     </td>
-<td> 否           </td>
-<td> 是      </td>
-<td> 是               </td>
+<td style="text-align:center;"> 否     </td>
+<td style="text-align:center;"> 否           </td>
+<td style="text-align:center;"> 是      </td>
+<td style="text-align:center;"> 是               </td>
 </tr>
 <tr>
 <td> Ordering and Barriers    </td>
 <td> Barriers    </td>
-<td> \      </td>
-<td> \            </td>
-<td> \       </td>
-<td> \                </td>
+<td style="text-align:center;"> \      </td>
+<td style="text-align:center;"> \            </td>
+<td style="text-align:center;"> \       </td>
+<td style="text-align:center;"> \                </td>
 </tr>
 </tbody>
 </table>
