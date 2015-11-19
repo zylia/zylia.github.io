@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-11-19T10:53:53+08:00</updated>
+  <updated>2015-11-19T10:57:55+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -23,7 +23,9 @@
 <table>
 <thead>
 <tr>
+<th></th>
 <th> 英文名                   </th>
+<th></th>
 <th> 中文名      </th>
 <th> 可睡眠 </th>
 <th> 可被内核抢占 </th>
@@ -33,7 +35,9 @@
 </thead>
 <tbody>
 <tr>
+<td></td>
 <td> Atomic Operations        </td>
+<td></td>
 <td> 原子操作    </td>
 <td> 否     </td>
 <td> 否           </td>
@@ -41,7 +45,9 @@
 <td> 是               </td>
 </tr>
 <tr>
+<td></td>
 <td> Spin Locks               </td>
+<td></td>
 <td> 自旋锁      </td>
 <td> 否     </td>
 <td> 否           </td>
@@ -49,7 +55,9 @@
 <td> 是               </td>
 </tr>
 <tr>
+<td></td>
 <td> Reader-Writer Spin Locks </td>
+<td></td>
 <td> 读写自旋锁  </td>
 <td> 否     </td>
 <td> 否           </td>
@@ -57,7 +65,9 @@
 <td> 是               </td>
 </tr>
 <tr>
+<td></td>
 <td> Semaphores               </td>
+<td></td>
 <td> 信号量      </td>
 <td> 是     </td>
 <td> 是           </td>
@@ -65,7 +75,9 @@
 <td> 否               </td>
 </tr>
 <tr>
+<td></td>
 <td> Reader-Writer Semaphores </td>
+<td></td>
 <td> 读写信号量  </td>
 <td> 是     </td>
 <td> 是           </td>
@@ -73,7 +85,9 @@
 <td> 否               </td>
 </tr>
 <tr>
+<td></td>
 <td> Mutexes                  </td>
+<td></td>
 <td> Mutexes     </td>
 <td> 是     </td>
 <td> 否           </td>
@@ -81,7 +95,9 @@
 <td> 否               </td>
 </tr>
 <tr>
+<td></td>
 <td> Completion Variables     </td>
+<td></td>
 <td> 完成变量    </td>
 <td> 是     </td>
 <td> 是           </td>
@@ -89,7 +105,9 @@
 <td> 否               </td>
 </tr>
 <tr>
+<td></td>
 <td> BKL(Big Kernel Locks)    </td>
+<td></td>
 <td> 大内核锁    </td>
 <td> 是     </td>
 <td> 是           </td>
@@ -97,7 +115,9 @@
 <td> 否               </td>
 </tr>
 <tr>
+<td></td>
 <td> Sequential Locks         </td>
+<td></td>
 <td> 顺序锁      </td>
 <td> 是     </td>
 <td> 读是写否     </td>
@@ -105,7 +125,9 @@
 <td> 读是写否         </td>
 </tr>
 <tr>
+<td></td>
 <td> Preemption Disabling     </td>
+<td></td>
 <td> 禁止抢占    </td>
 <td> 否     </td>
 <td> 否           </td>
@@ -113,7 +135,9 @@
 <td> 是               </td>
 </tr>
 <tr>
+<td></td>
 <td> Ordering and Barriers    </td>
+<td></td>
 <td> Barriers    </td>
 <td> \      </td>
 <td> \            </td>
