@@ -4,7 +4,7 @@
   <title><![CDATA[Zylia's Blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-11-19T09:52:58+08:00</updated>
+  <updated>2015-11-19T09:55:38+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -18,17 +18,16 @@
     <link href="http://zylia.github.io/blog/2015/11/19/kernel-synchronization-method/"/>
     <updated>2015-11-19T09:41:42+08:00</updated>
     <id>http://zylia.github.io/blog/2015/11/19/kernel-synchronization-method</id>
-    <content type="html"><![CDATA[<p>内核的同步机制有原子操作(Atomic Operations)、自旋锁(Spin Locks)、读写自旋锁(Reader-Writer Spin Locks)、
-信号量(Semaphores)、读写信号量(Reader-Writer Semaphores)、Mutexes、Completion Variables、
-BKL(Big Kernel Lock)、顺序锁(Sequential Lock)、禁止抢断(Preemption Disabling)、Barriers</p>
+    <content type="html"><![CDATA[<p>内核的同步机制有原子操作、自旋锁、读写自旋锁、信号量、读写信号量、Mutexes、Completion Variables、
+BKL、顺序锁、禁止抢断、Barriers</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Window 7配置octopress]]></title>
-    <link href="http://zylia.github.io/blog/2015/03/14/test/"/>
+    <link href="http://zylia.github.io/blog/2015/03/14/install-octopress/"/>
     <updated>2015-03-14T14:23:07+08:00</updated>
-    <id>http://zylia.github.io/blog/2015/03/14/test</id>
+    <id>http://zylia.github.io/blog/2015/03/14/install-octopress</id>
     <content type="html"><![CDATA[<p>受一位同仁经常用octopress写博客的启发，我也准备搭个博客。</p>
 
 <p>我的安装环境是Window 7 32位系统，需要事先下载的软件有：</p>
