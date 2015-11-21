@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | zylia's blog]]></title>
   <link href="http://zylia.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-11-21T13:00:46+08:00</updated>
+  <updated>2015-11-21T13:03:27+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -18,7 +18,7 @@
     <link href="http://zylia.github.io/blog/2015/11/19/kernel-synchronization-method/"/>
     <updated>2015-11-19T09:41:42+08:00</updated>
     <id>http://zylia.github.io/blog/2015/11/19/kernel-synchronization-method</id>
-    <content type="html"><![CDATA[<h3>内核设计中避免产生死锁的几点考虑</h3>
+    <content type="html"><![CDATA[<h2>内核设计中避免产生死锁的几点考虑</h2>
 
 <ul>
 <li>自旋锁不可嵌套。如果可嵌套的话，那么意味着要尝试获得一个已经被占有的锁。而自旋锁会不断忙等，被占有的锁不会被释放。</li>
@@ -31,7 +31,7 @@
 <!--more-->
 
 
-<h3>内核的同步机制总结</h3>
+<h2>内核的同步机制总结</h2>
 
 <table>
 <thead>
