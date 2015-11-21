@@ -4,7 +4,7 @@
   <title><![CDATA[zylia's blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-11-21T12:55:34+08:00</updated>
+  <updated>2015-11-21T13:00:46+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -30,8 +30,6 @@
 
 <!--more-->
 
-
-<hr />
 
 <h3>内核的同步机制总结</h3>
 
