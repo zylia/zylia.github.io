@@ -4,7 +4,7 @@
   <title><![CDATA[zylia's blog]]></title>
   <link href="http://zylia.github.io/atom.xml" rel="self"/>
   <link href="http://zylia.github.io/"/>
-  <updated>2015-11-21T13:20:38+08:00</updated>
+  <updated>2015-11-21T13:29:16+08:00</updated>
   <id>http://zylia.github.io/</id>
   <author>
     <name><![CDATA[zylia]]></name>
@@ -153,14 +153,16 @@
 
 <p>2) Ruby: <a href="http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe">http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe</a></p>
 
-<p>3) DevKit: <a href="http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></p>
+<p>3) DevKit: <a href="http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe">http://dl.bintray.com/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe</a></font></p>
+
+<!-- more -->
+
+
+<p><font size=2></p>
 
 <p>4) Python: <a href="http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi">http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi</a></p>
 
 <p>5) easy_install: <a href="https://bootstrap.pypa.io/ez_setup.py">https://bootstrap.pypa.io/ez_setup.py</a></font></p>
-
-<!-- more -->
-
 
 <p>经过测试，这些软件版本可以安装成功。</p>
 
